@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ip:</strong>
+  <%= @api.ip %>
+</p>
+
+<p>
+  <strong>Imsi:</strong>
+  <%= @api.imsi %>
+</p>
+
+<p>
+  <strong>Ecgi:</strong>
+  <%= @api.ecgi %>
+</p>
+
+<%= link_to 'Edit', edit_api_path(@api) %> |
+<%= link_to 'Back', apis_path %>

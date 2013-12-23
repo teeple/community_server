@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_name: MyString
+  phone_no: MyString
+  imsi: MyString
+  ecgi: MyString
+  description: MyString
+  profile_img: 
+
+two:
+  user_name: MyString
+  phone_no: MyString
+  imsi: MyString
+  ecgi: MyString
+  description: MyString
+  profile_img: 

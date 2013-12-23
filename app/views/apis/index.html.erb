@@ -1,0 +1,31 @@
+<h1>Listing apis</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Ip</th>
+      <th>Imsi</th>
+      <th>Ecgi</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @apis.each do |api| %>
+      <tr>
+        <td><%= api.ip %></td>
+        <td><%= api.imsi %></td>
+        <td><%= api.ecgi %></td>
+        <td><%= link_to 'Show', api %></td>
+        <td><%= link_to 'Edit', edit_api_path(api) %></td>
+        <td><%= link_to 'Destroy', api, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Api', new_api_path %>

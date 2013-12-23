@@ -1,0 +1,29 @@
+<h1>Listing message_flags</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Message</th>
+      <th>User</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @message_flags.each do |message_flag| %>
+      <tr>
+        <td><%= message_flag.message_id %></td>
+        <td><%= message_flag.user_id %></td>
+        <td><%= link_to 'Show', message_flag %></td>
+        <td><%= link_to 'Edit', edit_message_flag_path(message_flag) %></td>
+        <td><%= link_to 'Destroy', message_flag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Message flag', new_message_flag_path %>

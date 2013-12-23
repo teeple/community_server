@@ -1,0 +1,2 @@
+module MessageFlagsHelper
+end
