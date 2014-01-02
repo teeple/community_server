@@ -2,7 +2,7 @@ ComDev::Application.routes.draw do
   resources :apis
 
   #get "login/login"
-  get '/login', :to => 'login#login'
+  #get '/login', :to => 'login#login'
   
   resources :message_flags
 
@@ -11,6 +11,8 @@ ComDev::Application.routes.draw do
   resources :messages
 
   resources :users
+  
+  resources :sessions,      only: [:new, :create, :destroy]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -50,6 +50,9 @@ group :development, :test do
     gem 'database_cleaner'
     gem 'factory_girl'
     gem 'spinach-rails'
+    gem 'capybara'
+    gem 'webrat'
+    gem "rack-test", require: "rack/test"
     gem 'rspec-rails'
     gem 'require_all'
     gem 'debugger'
