@@ -55,5 +55,8 @@ group :development, :test do
     gem "rack-test", require: "rack/test"
     gem 'rspec-rails'
     gem 'require_all'
+    gem 'show_me_the_cookies'
     gem 'debugger'
+    #gem "launchy", "~> 2.4.2"
+    gem 'selenium-webdriver'
 end

@@ -1,4 +1,8 @@
 module CommonHelpers
+  def app
+    Rails.application
+  end
+  
   def create_test_user_to_api_server
     if !record = Api.find_by(ip: '127.0.0.1', imsi: '1111111', ecgi: '222222')
       Api.create!(ip: '127.0.0.1', imsi: '1111111', ecgi: '222222')
