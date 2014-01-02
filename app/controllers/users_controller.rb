@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, except: [:new]
-  Rails.logger = Logger.new(STDOUT)
+  
   # GET /users
   # GET /users.json
   def index

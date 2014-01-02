@@ -15,8 +15,17 @@ module SessionsHelper
   end
 
   def current_user
-    remember_token  = User.encrypt(cookies[:remember_token])
-    @current_user ||= User.find_by(remember_token: remember_token)
+    if cookies[:remember_token]
+      remember_token  = User.encrypt(cookies[:remember_token])
+      @current_user ||= User.find_by(remember_token: remember_token)
+    else
+      logger.info '##############'
+      ip_address = request.remote_ip
+      # call API server with ip_address
+      response = get_imsi_ecgi(ip_address)    
+      logger.info(response)
+      nil
+    end
   end
 
   def current_user?(user)

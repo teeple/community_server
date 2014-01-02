@@ -60,3 +60,8 @@ group :development, :test do
     #gem "launchy", "~> 2.4.2"
     gem 'selenium-webdriver'
 end
+
+gem 'log4r'
+
+gem 'rest-client'
+gem 'dotenv-rails'

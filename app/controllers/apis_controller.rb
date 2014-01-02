@@ -1,6 +1,19 @@
 class ApisController < ApplicationController
   before_action :set_api, only: [:show, :edit, :update, :destroy]
+  
+  def IMSI
+    debugger
+  end
 
+  def imsi_ecgi
+    debugger
+    #@api = Api.find_by_ip(params[:IP])
+  end
+
+  def temp
+    debugger
+  end
+  
   # GET /apis
   # GET /apis.json
   def index
@@ -10,6 +23,7 @@ class ApisController < ApplicationController
   # GET /apis/1
   # GET /apis/1.json
   def show
+    debugger
   end
 
   # GET /apis/new
@@ -61,6 +75,12 @@ class ApisController < ApplicationController
     end
   end
 
+  def get_imsi_ecgi
+  end
+
+  def activate_tracking
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_api
@@ -71,4 +91,5 @@ class ApisController < ApplicationController
     def api_params
       params.require(:api).permit(:ip, :imsi, :ecgi)
     end
+
 end

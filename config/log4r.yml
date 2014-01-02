@@ -1,0 +1,39 @@
+log4r_config:
+  loggers:
+    - name : development
+      level : ERROR
+      additive : 'false'
+      trace : 'true'
+      outputters:
+      - standard_log_outputter
+    - name : production
+      level : INFO
+      additive : 'false'
+      trace : 'true'
+      outputters:
+      - standard_log_outputter
+ 
+  outputters:
+    - type : StderrOutputter
+      name : stderr_outputter
+      level : INFO
+      formatter:
+        date_pattern: '%Y-%m-%d %H:%M:%S'
+        pattern : "[%d] PID:%p %l %m"
+        type : PatternFormatter
+    - type : FileOutputter
+      name : standard_log_outputter
+      trunc : 'false'
+      filename : <%= "#{Rails.root}/log/#{Rails.env}.log" %>
+      formatter :
+        date_pattern: '%Y-%m-%d %H:%M:%S'
+        pattern : "[%d] %l %m"
+        type : PatternFormatter
+    - type : FileOutputter
+      name : standard_plus_trace_log_outputter
+      trunc : 'false'
+      filename : <%= "#{Rails.root}/log/#{Rails.env}.log" %>
+      formatter :
+        date_pattern: '%Y-%m-%d %H:%M:%S'
+        pattern : "[%d] PID:%p %t %l %m"
+        type : PatternFormatter

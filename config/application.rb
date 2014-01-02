@@ -1,6 +1,7 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'rest_client'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -20,5 +21,10 @@ module ComDev
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     # config.action_view.embed_authenticity_token_in_remote_forms = true
+    #...
+    # assign log4r's logger as rails' logger.
   end
 end
+
+require File.expand_path(File.dirname(__FILE__) + "/log4r_init.rb")
+

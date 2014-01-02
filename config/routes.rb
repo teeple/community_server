@@ -1,5 +1,12 @@
 ComDev::Application.routes.draw do
-  resources :apis
+  # get '/Management/IMSI' , :to => 'apis#get_imsi_ecgi'
+  # get 'Management/IMSI' , to: 'apis#get_imsi_ecgi', as: 'get_imsi'
+
+  get 'Management/IMSI', to: 'apis#imsi_ecgi'
+
+  resources :apis,     only: [:new, :create, :destroy, :show]
+
+  # get 'Management/IMSI' , :to => 'apis#get_imsi_ecgi'
 
   #get "login/login"
   #get '/login', :to => 'login#login'
