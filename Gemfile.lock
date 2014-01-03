@@ -82,6 +82,7 @@ GEM
     multi_json (1.8.2)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
+    nori (2.3.0)
     polyglot (0.3.3)
     racc (1.4.10)
     rack (1.5.2)
@@ -185,6 +186,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   log4r
+  nori
   rack-test
   railroady
   rails (= 4.0.2)

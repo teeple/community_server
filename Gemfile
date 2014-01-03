@@ -65,3 +65,4 @@ gem 'log4r'
 
 gem 'rest-client'
 gem 'dotenv-rails'
+gem 'nori'

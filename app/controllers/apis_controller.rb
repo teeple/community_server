@@ -1,19 +1,10 @@
 class ApisController < ApplicationController
   before_action :set_api, only: [:show, :edit, :update, :destroy]
   
-  def IMSI
-    debugger
-  end
-
   def imsi_ecgi
-    debugger
-    #@api = Api.find_by_ip(params[:IP])
+    @api = Api.find_by_ip(params[:IP])
   end
 
-  def temp
-    debugger
-  end
-  
   # GET /apis
   # GET /apis.json
   def index
