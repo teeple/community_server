@@ -26,19 +26,22 @@ class Spinach::Features::SignUp < Spinach::FeatureSteps
   end
 
   step '아이디 미입력' do
-    pending 'step not implemented'
+    fill_in('user_user_name',{:with => ''})
   end
 
   step '"아이디를 입력하세요" 출력' do
-    pending 'step not implemented'
+    page.should have_content('아이디를 입력하세요')
   end
 
   step '형식에 맞지 않는 전화번호 입력' do
-    pending 'step not implemented'
+    fill_in('user_imsi',{:with => '33'})
+    fill_in('user_ecgi',{:with => '44'})
+    fill_in('user_user_name',{:with => 'user2'})
+    fill_in('user_phone_no',{:with => '0101111aaaa'})
   end
 
   step '"형식에 맞지 않는 전화번호 입니다" 출력' do
-    pending 'step not implemented'
+    page.should have_content('형식에 맞지 않는 전화번호 입니다')
   end
 
   step '형식에 맞지 않는 아이디 입력' do
