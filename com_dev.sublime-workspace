@@ -1,0 +1,242 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "features/steps/sign_up.rb",
+			"settings":
+			{
+				"buffer_size": 1414,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 47.0,
+		"selected_items":
+		[
+			[
+				"instal",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/realjangsun/Documents/remote_server/com_dev/sftp-config.json",
+		"/Users/realjangsun/Documents/remote_server/com_dev/db/schema.rb",
+		"/Users/realjangsun/Documents/remote_server/com_dev/features/steps/common_steps.rb",
+		"/Users/realjangsun/Documents/remote_server/com_dev/features/test#7_auto_login.feature",
+		"/Users/realjangsun/Documents/remote_server/boot_test/app/assets/stylesheets/custom.css.scss",
+		"/Users/realjangsun/Documents/remote_server/boot_test/app/assets/javascripts/custom_onready.js",
+		"/Users/realjangsun/Documents/remote_server/boot_test/app/assets/javascripts/custom_tab.js",
+		"/Users/realjangsun/Documents/remote_server/boot_test/app/views/users/get_userlist.html.erb",
+		"/Users/realjangsun/Documents/remote_server/boot_test/app/assets/javascripts/application.js",
+		"/Users/realjangsun/Documents/remote_server/boot_test/app/assets/stylesheets/application.css.scss",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/setting.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/js/custom_tab.js",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/users.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/custom.css",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/navi.css",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/search.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/message.html",
+		"/Users/realjangsun/Library/Application Support/Sublime Text 2/Packages/User/SFTP.errors.log",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/signup.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/lib/jasny-bootstrap_3.0.1/css/bootstrap-theme.css",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/message_new.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/lib/jquery_2.0.3/jquery.min.js",
+		"/Users/realjangsun/Documents/remote_server/newbiz/sftp-config.json",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/bootstrap/css/bootstrap.css",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/message_unread.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/message_all.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/users_following.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/users_unfollowing.html",
+		"/Users/realjangsun/Documents/remote_server/newbiz/comm_dev/profile_youngmin.jpg",
+		"/Users/realjangsun/Library/Application Support/Sublime Text 2/Packages/Package Control/Package Control.sublime-settings",
+		"/Users/realjangsun/Downloads/roux_website/_css/main.css",
+		"/Users/realjangsun/Downloads/roux_website/spotlight.htm",
+		"/Users/realjangsun/Downloads/roux_website/admissions/request.htm",
+		"/Users/realjangsun/Downloads/roux_website/404.shtml",
+		"/Users/realjangsun/Downloads/roux_website/index.htm",
+		"/Users/realjangsun/Downloads/roux_website/_scripts/SpryTabbedPanels.js",
+		"/Users/realjangsun/Downloads/Ex_Files_UaR_SublimeTxt_2/Exercise Files/roux_website/index.htm"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"users_tab",
+			"header",
+			"header\n\nheader",
+			"header"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": false,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "features/steps/sign_up.rb",
+					"settings":
+					{
+						"buffer_size": 1414,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Ruby/Ruby.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 100.0
+	},
+	"output.sftp":
+	{
+		"height": 100.0
+	},
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"4",
+				"/Users/realjangsun/Downloads/roux_website/404.shtml"
+			],
+			[
+				"in",
+				"/Users/realjangsun/Downloads/roux_website/index.htm"
+			],
+			[
+				"",
+				"/Users/realjangsun/Downloads/roux_website/index.htm"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"/Users/realjangsun/Documents/com_dev.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 327.0,
+	"status_bar_visible": true
+}

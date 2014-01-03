@@ -10,7 +10,6 @@ require 'show_me_the_cookies'
 
 #require_all 'app/**/*.rb'
 require './features/steps/common_helpers.rb'
-require './features/steps/common_steps.rb'
 require 'ruby-debug'
 
 #require 'database_cleaner'

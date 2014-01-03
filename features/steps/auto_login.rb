@@ -1,8 +1,12 @@
 class Spinach::Features::AutoLogin < Spinach::FeatureSteps
-  include CommonSteps
+  include CommonHelpers
     
   # 가압자를 community server에 생성
   # 가입자를 API Server에 생성
+  step '비가입자' do
+    user_not_registered
+  end
+
   step '사용자 설정 페이지 접속' do
     if @user
       visit(user_path(@user))

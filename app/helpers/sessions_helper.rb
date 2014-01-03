@@ -21,8 +21,8 @@ module SessionsHelper
       @current_user ||= User.find_by(remember_token: remember_token)
     end
 
-    # API 서버 확인 후 가입자이면 로그인 처리
-    # 가입자가 아니면 가입 페이지로 이동
+    # cookie가 없거나, current_user가 Community Server에 없을 경우
+
     if !@current_user
       ip_address = request.remote_ip
       # call API server with ip_address
@@ -35,6 +35,7 @@ module SessionsHelper
         ecgi = result['BODY']['ECGI']
         
         user = User.find_by imsi: imsi, ecgi:ecgi
+        # 가입자이면 가입 처리 진행
         if user
           sign_in user
         end
@@ -70,5 +71,5 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url if request.get?
   end
-  
+
 end
