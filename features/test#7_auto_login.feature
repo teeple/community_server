@@ -2,7 +2,8 @@
 
 Feature: Auto Login 
   Scenario: 새로운 가입자는 가입화면을 띄운다.
-    Given 비가입자
+    Given 모든 가입자 삭제
+    And 비가입자
     When 사용자 설정 페이지 접속
     Then 가입화면으로 이동
 

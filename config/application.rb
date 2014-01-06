@@ -23,6 +23,7 @@ module ComDev
     # config.action_view.embed_authenticity_token_in_remote_forms = true
     #...
     # assign log4r's logger as rails' logger.
+    config.autoload_paths += %W(#{config.root}/lib)
   end
 end
 

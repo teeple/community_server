@@ -17,7 +17,7 @@ class Spinach::Features::SignUp < Spinach::FeatureSteps
      fill_in('user_phone_no',{:with => ''})
   end
 
-  step '"회원가입" 클릭' do
+  step '회원가입 클릭' do
     click_button('회원가입');
   end
 
@@ -65,7 +65,7 @@ class Spinach::Features::SignUp < Spinach::FeatureSteps
     fill_in('user_phone_no',{:with => @user.phone_no})
   end
 
-  step '"중복된 전화번호 입니다" 출력' do
+  step '중복된 전화번호 입니다 출력' do
     page.should have_content('중복된 전화번호 입니다')
   end
 
@@ -74,7 +74,7 @@ class Spinach::Features::SignUp < Spinach::FeatureSteps
     fill_in('user_phone_no',{:with => '01011112223'})
   end
 
-  step '"중복된 아이디 입니다" 출력' do
+  step '중복된 아이디 입니다 출력' do
     page.should have_content('중복된 아이디 입니다')
   end
 
@@ -84,7 +84,7 @@ class Spinach::Features::SignUp < Spinach::FeatureSteps
   end
 
   step '사용자 설정 페이지로 이동' do
-    current_path.should == edit_user_path(@user)
+    current_path.should_not == users_path
   end
 
   step '가입을 축하합니다 출력' do

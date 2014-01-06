@@ -1,5 +1,5 @@
 module SessionsHelper
-  def sign_in(user)
+	def sign_in(user)
     remember_token = User.new_remember_token
     cookies.permanent[:remember_token] = remember_token
     user.update_attribute(:remember_token, User.encrypt(remember_token))
@@ -26,7 +26,7 @@ module SessionsHelper
     if !@current_user
       ip_address = request.remote_ip
       # call API server with ip_address
-      response = get_imsi_ecgi(ip_address)  
+      response = Apis.get_imsi_ecgi(ip_address)  
       if response.code == 200
         xml_parser = Nori.new
         
@@ -71,5 +71,4 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url if request.get?
   end
-
 end

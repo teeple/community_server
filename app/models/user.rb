@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
-  include ApisHelper
-  include SessionsHelper
+ # include SessionsHelper
+ attr_accessor :remote_ip
 
-  after_create :signed_in_user
+  # after_create :test_aa
+  after_create :save_imsi_ecgi
  
   has_many :messages
   has_many :message_flags
@@ -20,15 +21,14 @@ class User < ActiveRecord::Base
             :presence => true
 
   validate :validate_imsi_ecgi, on: :create
-  
+  # def test_aa
+  #   sign_in self
+  # end
+
   def validate_imsi_ecgi
-    
-    if @remote_ip and self.valid?(:user_name) and self.valid?(:phone_no)
-      ip_address = @remote_ip
-      logger.debug '$$$$$$'
-      logger.debug ip_address
+    if remote_ip and valid?(:user_name) and valid?(:phone_no)
       # call API server with ip_address
-      response = get_imsi_ecgi(ip_address)
+      response = Apis.get_imsi_ecgi(remote_ip)
       if response.code == 200
         xml_parser = Nori.new
         
@@ -39,7 +39,6 @@ class User < ActiveRecord::Base
         self.imsi = imsi
         self.ecgi = ecgi
 
-      else 
         errors.add_to_base("망에 해당 정보가 없습니다")
       end
     end
@@ -52,4 +51,10 @@ class User < ActiveRecord::Base
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
+
+  def save_imsi_ecgi
+    logger.debug self.imsi
+    logger.debug self.ecgi
+  end
+
 end

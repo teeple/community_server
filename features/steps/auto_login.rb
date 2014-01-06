@@ -1,6 +1,9 @@
 class Spinach::Features::AutoLogin < Spinach::FeatureSteps
   include CommonHelpers
     
+  step '모든 가입자 삭제' do
+    user_destroy_all
+  end
   # 가압자를 community server에 생성
   # 가입자를 API Server에 생성
   step '비가입자' do

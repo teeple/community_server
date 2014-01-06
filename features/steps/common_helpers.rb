@@ -11,8 +11,7 @@ module CommonHelpers
     if user = User.find_by(imsi: '11', ecgi: '22')
       user.destroy
     end
-    #User.delete_all
-  
+    
     create_test_user_to_api_server
     #@user = nil
     #@user

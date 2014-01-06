@@ -25,12 +25,12 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @remote_ip = request.remote_ip
     @user = User.new(user_params)
+    @user.remote_ip = request.remote_ip
 
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to @user, notice: '가입을 축하합니다' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
