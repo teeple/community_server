@@ -38,9 +38,12 @@ en:
           attributes:
             user_name:
               blank: "아이디를 입력하세요"
+              invalid: "형식에 맞지 않는 아이디 입니다"
+              taken: "중복된 아이디 입니다"
             phone_no:
               blank: "전화번호를 입력하세요"
               invalid: "형식에 맞지 않는 전화번호 입니다"
+              taken: "중복된 전화번호 입니다"
 
 # confirmation	-	:confirmation	-
 # acceptance	-	:accepted	-

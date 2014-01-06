@@ -41,9 +41,14 @@ module CommonHelpers
   # API 서버에 TEST User를 등록하고, Community Server에 등록된 사용자 가져옴
 	def get_test_user
     create_test_user_to_api_server
+
     if !user = User.find_by(imsi: '11', ecgi: '22')
-      user = User.create!(:imsi => '11', :ecgi=> '22', :phone_no => '010-1111-1111', :user_name => 'user1')
+      user = User.create!(:imsi => '11', :ecgi=> '22', :phone_no => '01011111111', :user_name => 'user1')
     end
     user
   end
+
+  def user_destroy_all
+    User.destroy_all
+  end 
 end
