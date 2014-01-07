@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231061457) do
+ActiveRecord::Schema.define(version: 20140106095108) do
 
   create_table "apis", force: true do |t|
     t.string   "ip"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20131231061457) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "remember_token"
+    t.boolean  "user_type",      default: false
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token"

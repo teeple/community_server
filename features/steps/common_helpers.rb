@@ -50,4 +50,15 @@ module CommonHelpers
   def user_destroy_all
     User.destroy_all
   end 
+
+  def generate_common_data
+    hash = YAML.load(File.read("#{Rails.root}/features/steps/common_data.yml"))
+  end
+
+  def create_related_user(user_from,user_type,postfix,following)
+    user = User.create!(:user_name => 'user' + postfix, :phone_no => '010111122' + postfix, :imsi => '11' + postfix, :ecgi => '11' + postfix, :user_type => user_type)
+    Relation.create!(:user_from => user_from, :user_to => user.id) if following
+    user
+  end
+
 end

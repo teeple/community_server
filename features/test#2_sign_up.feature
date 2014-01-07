@@ -1,3 +1,5 @@
+@tested
+
 Feature: Sign Up
   Scenario: 전화번호 미입력
     Given 비가입자

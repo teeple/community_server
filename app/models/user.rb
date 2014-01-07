@@ -7,7 +7,11 @@ class User < ActiveRecord::Base
  
   has_many :messages
   has_many :message_flags
-  has_many :relations
+  has_many :relations, class_name: 'Relation', foreign_key: :user_from, dependent: :destroy
+  has_many :users, through: :relations
+  
+  scope :users_general, where(user_type: false).order("user_name asc") 
+  scope :users_cafe, where(user_type: true).order("user_name asc") 
 
   validates :phone_no, 
             :uniqueness => true,
@@ -21,9 +25,18 @@ class User < ActiveRecord::Base
             :presence => true
 
   validate :validate_imsi_ecgi, on: :create
-  # def test_aa
-  #   sign_in self
-  # end
+
+  def self.followers(user)
+    user.users.order("user_name asc")
+  end
+
+  def self.not_followers(user)
+    (User.users_general - Array(user) - User.followers(user))
+  end
+
+  def self.cafes(user)
+    (User.users_cafe - Array(user) - User.followers(user))
+  end
 
   def validate_imsi_ecgi
     if remote_ip and valid?(:user_name) and valid?(:phone_no)
@@ -39,7 +52,6 @@ class User < ActiveRecord::Base
         self.imsi = imsi
         self.ecgi = ecgi
 
-        errors.add_to_base("망에 해당 정보가 없습니다")
       end
     end
   end

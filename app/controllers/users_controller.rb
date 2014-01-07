@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, except: [:new, :create]
+  #before_action :signed_in_user, except: [:new, :create]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @current_user = User.first
+    @users = Hash.new
+    @users[:followers] = User.followers(@current_user)
+    @users[:not_followers] = User.not_followers(@current_user)
+    @users[:cafes] = User.cafes(@current_user)
   end
 
   # GET /users/1

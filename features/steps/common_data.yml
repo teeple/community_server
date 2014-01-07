@@ -1,0 +1,60 @@
+user:
+  follower:
+    [
+      {
+        user_name: user10,
+        phone_no: 01011112210,
+        imsi: 0010,
+        ecgi: 0010,
+        user_type: false
+      },   
+      {
+        user_name: user11,
+        phone_no: 01011112211,
+        imsi: 0011,
+        ecgi: 0011,
+        user_type: false
+      },
+      {
+        user_name: user12,
+        phone_no: 01011112212,
+        imsi: 0012,
+        ecgi: 0012,
+        user_type: false
+      },   
+      {
+        user_name: user13,
+        phone_no: 01011112213,
+        imsi: 0013,
+        ecgi: 0013,
+        user_type: false
+      },
+      {
+        user_name: user14,
+        phone_no: 01011112214,
+        imsi: 0014,
+        ecgi: 0014,
+        user_type: false
+      },   
+      {
+        user_name: user15,
+        phone_no: 01011112215,
+        imsi: 0015,
+        ecgi: 0015,
+        user_type: false
+      },
+      {
+        user_name: user16,
+        phone_no: 01011112216,
+        imsi: 0016,
+        ecgi: 0016,
+        user_type: true
+      },   
+      {
+        user_name: user17,
+        phone_no: 01011112217,
+        imsi: 0017,
+        ecgi: 0017,
+        user_type: true
+      },
+    ]
