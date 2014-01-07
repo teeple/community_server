@@ -37,52 +37,35 @@ class Spinach::Features::UserList < Spinach::FeatureSteps
   end
 
   step 'Follower 리스트가 보인다' do
-    page.should have_selector('#tab_content_followers', visible: true)
-    
-    within("#tab_content_followers") do
+    within("#content_users") do
       all('em').each do |em| 
         @followers.has_key?(em.value.to_sym).should == true
       end
     end
   end
 
-  step 'Not Follower 리스트가 안보인다' do
-    page.should have_selector('#tab_content_not-followers', visible: false)
-  end
-
-  step 'Cafe 리스트가 안보인다' do
-    page.should have_selector('#tab_content_cafes', visible: false)
-  end
-
   step 'Not Follower 탭 클릭' do
-    click_link('Not Followers')
+    click_link("Not Followers")
   end
 
   step 'Not Follower 리스트가 보인다' do
-    page.should have_selector('#tab_content_not-followers', visible: true)
-    within("#tab_content_followers") do
+    within("#content_users") do
       all('em').each do |em| 
         @not_followers.has_key?(em.value.to_sym).should == true
       end
     end
   end
 
-  step 'Follower 리스트가 안보인다' do
-    page.should have_selector('#tab_content_followers', visible: false)
-  end
-
   step 'Cafe 탭 클릭' do
-    #click_link('tab_btn_cafes')
-    breakpoint
-    0
+    click_link("Cafes")
   end
 
   step 'Cafe 리스트가 보인다' do
-    page.should have_selector('#tab_content_cafes', visible: true)
-    within("#tab_content_followers") do
+    within("#content_users") do
       all('em').each do |em| 
         @cafes.has_key?(em.value.to_sym).should == true
       end
     end
+
   end
 end

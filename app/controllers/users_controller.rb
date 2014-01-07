@@ -5,11 +5,30 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    #temp current user
     @current_user = User.first
-    @users = Hash.new
-    @users[:followers] = User.followers(@current_user)
-    @users[:not_followers] = User.not_followers(@current_user)
-    @users[:cafes] = User.cafes(@current_user)
+
+    @tab_class = Hash.new
+    @tab_class = {:followers => 'btn-default', 
+      :not_followers => 'btn-default', 
+      :cafes => 'btn-default', 
+    }
+    @tab = params[:tab]? params[:tab] : 'followers'
+    @tab_class[@tab.to_sym] = 'btn-primary'
+
+    page_num = params[:page]? params[:page] : 1
+
+    logger.debug '######'
+    logger.debug @current_user
+    logger.debug page_num
+    case params[:tab]
+      when 'not_followers'
+        @users = User.not_followers(@current_user,page_num)
+      when 'cafes'
+        @users = User.cafes(@current_user,page_num)
+      else      
+        @users = User.followers(@current_user,page_num)        
+    end
   end
 
   # GET /users/1

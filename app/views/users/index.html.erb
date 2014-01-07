@@ -12,7 +12,7 @@
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="collapse navbar-collapse" id="nav_bar">
     <ul class="nav navbar-nav">
       <li><a href="message.html">Message</a></li>
       <li><a href="users.html">User</a></li>
@@ -23,17 +23,22 @@
 </nav>
 <div class="nav-padding"></div>
 
-<div class="bs-example">
+<!--<div class="bs-example">
   <div class="btn-group btn-group-justified">
-    <a class="btn btn-primary" role="button" id="tab_btn_followers" data-target="#tab_content_followers">Followers</a>
-    <a class="btn btn-default" role="button" id="tab_btn_not-followers" data-target="#tab_content_not-followers">Not Followers</a>
-    <a class="btn btn-default" role="button" id="tab_btn_cafes" data-target="#tab_content_cafes">Cafes</a>
+    <a class="btn btn-primary" role="button" id="tab_btn_followers" data-target="#tab_content_followers" href="#nav_bar">Followers</a>
+    <a class="btn btn-default" role="button" id="tab_btn_not_followers" data-target="#tab_content_not_followers" href="#nav_bar">Not Followers</a>
+    <a class="btn btn-default" role="button" id="tab_btn_cafes" data-target="#tab_content_cafes" href="#nav_bar">Cafes</a>
   </div>
+</div>-->
+<div class="btn-group btn-group-justified">
+  <a class="btn <%= @tab_class[:followers] %>" role="button" id="tab_btn_followers" href="/users?tab=followers">Followers</a>
+  <a class="btn <%= @tab_class[:not_followers] %>" role="button" id="tab_btn_not_followers"  href="/users?tab=not_followers">Not Followers</a>
+  <a class="btn <%= @tab_class[:cafes] %>" role="button" id="tab_btn_cafes" href="/users?tab=cafes">Cafes</a>
 </div>
 
 <!-- follower list -->
-<div class="container" id="tab_content_followers">
-  <% @users[:followers].each do |user| %>
+<div class="container" id="content_users">
+  <% @users.each do |user| %>
     <div class="row">
       <div class="col-xs-4">
         <a href="user.html">
@@ -50,44 +55,4 @@
   <% end %>
   <br/>
 </div>
-
-<!-- not_follower list -->
-<div class="container" id="tab_content_not-followers">
-  <% @users[:not_followers].each do |user| %>
-    <div class="row">
-      <div class="col-xs-4">
-        <a href="user.html">
-          <img style="width:100%;height:100px;" src="http://fmkorea.net/files/attach/images/3655109/494/914/033/de229fde613990d128d9b5c4c7f8455c.jpg" alt="....">
-        </a>
-      </div>
-      <div class="col-xs-7 well" style="vertical-align:middle;"><p >안녕하세요~ 저는 누구누구입니다. 어디어디 살구요. 무엇무엇 좋아해요 반가워요~</p></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-4" style="text-align:center;"><a href="user.html" align="center"><em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>"><%= user.user_name %></em></a></div>
-        <div class="col-xs-8">Follower <span class="badge"><%= user.relations.count %></span></div>
-    </div>
-    <div class="row"><div class="col-xs-12"><hr></div></div>
-  <% end %>
-  <br/>
-</div>
-
-<!-- cafe list -->
-<div class="container" id="tab_content_cafes">
-  <% @users[:cafes].each do |user| %>
-    <div class="row">
-      <div class="col-xs-4">
-        <a href="user.html">
-          <img style="width:100%;height:100px;" src="http://fmkorea.net/files/attach/images/3655109/494/914/033/de229fde613990d128d9b5c4c7f8455c.jpg" alt="....">
-        </a>
-      </div>
-      <div class="col-xs-7 well" style="vertical-align:middle;"><p >안녕하세요~ 저는 누구누구입니다. 어디어디 살구요. 무엇무엇 좋아해요 반가워요~</p></div>
-    </div>
-    <div class="row">
-        <div class="col-xs-4" style="text-align:center;"><a href="user.html" align="center"><em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>"><%= user.user_name %></em></a></div>
-        <div class="col-xs-8">Follower <span class="badge"><%= user.relations.count %></span></div>
-    </div>
-    <div class="row"><div class="col-xs-12"><hr></div></div>
-  <% end %>
-  <br/>
-</div>
-      
+<%= paginate @users %>

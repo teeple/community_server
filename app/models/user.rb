@@ -1,17 +1,23 @@
 class User < ActiveRecord::Base
  # include SessionsHelper
- attr_accessor :remote_ip
+  attr_accessor :remote_ip
+  paginates_per 7
 
   # after_create :test_aa
   after_create :save_imsi_ecgi
- 
+
   has_many :messages
   has_many :message_flags
   has_many :relations, class_name: 'Relation', foreign_key: :user_from, dependent: :destroy
   has_many :users, through: :relations
   
-  scope :users_general, where(user_type: false).order("user_name asc") 
-  scope :users_cafe, where(user_type: true).order("user_name asc") 
+  scope :users_general, -> {where(user_type: false).order("user_name asc")}
+  scope :users_cafe, -> {where(user_type: true).order("user_name asc")}
+
+  scope :users_general_without, -> (id) {where(user_type: false).where.not(id: id)}
+  scope :users_cafe_without, -> (id) {where(user_type: true).where.not(id: id)}
+
+  scope :users_with_relationship, -> (user) {where(id: user.users.pluck(:id))}
 
   validates :phone_no, 
             :uniqueness => true,
@@ -26,16 +32,17 @@ class User < ActiveRecord::Base
 
   validate :validate_imsi_ecgi, on: :create
 
-  def self.followers(user)
-    user.users.order("user_name asc")
+  def self.followers(user, page_num)
+    user.users.order("user_name asc").page(page_num)
   end
 
-  def self.not_followers(user)
-    (User.users_general - Array(user) - User.followers(user))
+  def self.not_followers(user, page_num)
+    #User.where.not(id: user.id).where(user_type: false).where.not(id: user.users.pluck(:id)).page(page_num)
+    User.users_general_without(user.id).where.not(id: User.users_with_relationship(user)).page(page_num)
   end
 
-  def self.cafes(user)
-    (User.users_cafe - Array(user) - User.followers(user))
+  def self.cafes(user, page_num)
+    User.users_cafe_without(user.id).where.not(id: User.users_with_relationship(user)).page(page_num)
   end
 
   def validate_imsi_ecgi
