@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
  # include SessionsHelper
   attr_accessor :remote_ip
-  paginates_per 7
+  paginates_per 3
 
   # after_create :test_aa
   after_create :save_imsi_ecgi

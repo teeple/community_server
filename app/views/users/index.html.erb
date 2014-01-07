@@ -54,5 +54,13 @@
     <div class="row"><div class="col-xs-12"><hr></div></div>
   <% end %>
   <br/>
+  <!-- paging -->
+  <div class="row">
+    <div class="col-xs-12">
+      <%= paginate @users ,:window => 1%>
+      <br/>
+    </div>
+  </div>
 </div>
-<%= paginate @users %>
+
+
