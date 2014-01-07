@@ -17,18 +17,18 @@ class Spinach::Features::UserList < Spinach::FeatureSteps
   end
 
   step 'Not Follower 가 여러 명 있다' do
-    @not_followers = Array.new
+    @not_followers = Hash.new
     for i in 30..40
       not_follower = create_related_user @user.id, false, "#{i}", false
-      @not_followers << not_follower
+      @not_followers[('user_id_' + not_follower.id.to_s).to_sym] =  true
     end
   end
 
   step 'Cafe 가 여러 명 있다' do
-    @cafes = Array.new
+    @cafes = Hash.new
     for i in 41..50
       cafe = create_related_user @user.id, true, "#{i}", false
-      @cafes << cafe
+      @cafes[('user_id_' + cafe.id.to_s).to_sym] =  true
     end
   end
 
@@ -37,39 +37,52 @@ class Spinach::Features::UserList < Spinach::FeatureSteps
   end
 
   step 'Follower 리스트가 보인다' do
+    page.should have_selector('#tab_content_followers', visible: true)
+    
     within("#tab_content_followers") do
-      all("em").each { |item| 
-        breakpoint
-        0 
-      }
+      all('em').each do |em| 
+        @followers.has_key?(em.value.to_sym).should == true
+      end
     end
   end
 
   step 'Not Follower 리스트가 안보인다' do
-    pending 'step not implemented'
+    page.should have_selector('#tab_content_not-followers', visible: false)
   end
 
   step 'Cafe 리스트가 안보인다' do
-    pending 'step not implemented'
+    page.should have_selector('#tab_content_cafes', visible: false)
   end
 
   step 'Not Follower 탭 클릭' do
-    pending 'step not implemented'
+    click_link('Not Followers')
   end
 
   step 'Not Follower 리스트가 보인다' do
-    pending 'step not implemented'
+    page.should have_selector('#tab_content_not-followers', visible: true)
+    within("#tab_content_followers") do
+      all('em').each do |em| 
+        @not_followers.has_key?(em.value.to_sym).should == true
+      end
+    end
   end
 
   step 'Follower 리스트가 안보인다' do
-    pending 'step not implemented'
+    page.should have_selector('#tab_content_followers', visible: false)
   end
 
   step 'Cafe 탭 클릭' do
-    pending 'step not implemented'
+    #click_link('tab_btn_cafes')
+    breakpoint
+    0
   end
 
   step 'Cafe 리스트가 보인다' do
-    pending 'step not implemented'
+    page.should have_selector('#tab_content_cafes', visible: true)
+    within("#tab_content_followers") do
+      all('em').each do |em| 
+        @cafes.has_key?(em.value.to_sym).should == true
+      end
+    end
   end
 end
