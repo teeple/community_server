@@ -37,6 +37,30 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    #temp current user
+    @current_user = User.first
+
+    @tab_class = Hash.new
+    @tab_class = {
+      :profile => 'btn-default', 
+      :message => 'btn-default', 
+    }
+    @tab = params[:tab]? params[:tab] : 'profile'
+    @tab_class[@tab.to_sym] = 'btn-primary'
+
+    respond_to do |format|
+      if params[:alarm]
+        @rel = @current_user.relations.where(:user_from => @current_user.id, :user_to => @user.id)[0]
+        eval_str = "@rel."+params[:alarm]+"=!"+params[:checked]
+        eval(eval_str)
+        @rel.save
+        @event_type = params[:alarm]
+        format.js {render action: 'show'}
+      else
+        format.html { render action: 'show' }
+      end
+    end
+
   end
 
   # GET /users/new

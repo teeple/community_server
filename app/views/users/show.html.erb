@@ -1,34 +1,107 @@
+<head>
+  <title>WARP Community</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+ 
+<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="#">User Profile</a>
+  </div>
+
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li><a href="message.html">Message</a></li>
+      <li><a href="users.html">User</a></li>
+      <li><a href="search.html">Search</a></li>
+      <li><a href="setting.html">Setting</a></li>
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</nav>
+<div class="nav-padding"></div>
+
+<!-- notice -->
+<br/>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User name:</strong>
-  <%= @user.user_name %>
-</p>
+<!-- profile -->
+<div class="container">
+  <div class="row">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-10 text-center">
+      <div class="fileinput fileinput-new" data-provides="fileinput">
+        <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
+          <%= image_tag @user.avatar.url(:medium) %>
+        </div>
+      </div>
+      <div><%= @user.user_name %></div>
+    </div>
+    <div class="col-xs-1"></div>
+  </div>
+</div>
 
-<p>
-  <strong>Phone no:</strong>
-  <%= @user.phone_no %>
-</p>
+<!-- tab -->
+<div class="btn-group btn-group-justified">
+  <a class="btn <%= @tab_class[:profile] %>" role="button" id="tab_btn_profile" href="<%= user_path(@user)%>?tab=profile">Profile</a>
+  <a class="btn <%= @tab_class[:message] %>" role="button" id="tab_btn_message"  href="<%= user_path(@user)%>?tab=message">Message</a>
+</div>
+<br/>
 
-<p>
-  <strong>Imsi:</strong>
-  <%= @user.imsi %>
-</p>
+<%if @tab_class[:profile] == "btn-primary" %>
+  <div class="container">
+    <div class="row-fluid">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-10"><%=@user.description%></div>
+      <div class="col-xs-1"></div>
+    </div>
+    <div class="row-fluid">
+      <div class="col-xs-6 text-center border-right">
+        <div><h1><%=@user.users.count%></h1></div>
+        Followers
+      </div>
+      <div class="col-xs-6 text-center">
+        <div>picture</div>
+        <div>Following</div>
+      </div>
+    </div>
+  </div>
 
-<p>
-  <strong>Ecgi:</strong>
-  <%= @user.ecgi %>
-</p>
+  </br>
+  <% rel = @current_user.relations.where(:user_from => @current_user.id, :user_to => @user.id)
+      event = Hash.new 
+      event = {:entry => false, :exit => false, :post => false, :disabled => true }
 
-<p>
-  <strong>Description:</strong>
-  <%= @user.description %>
-</p>
+      event_label = Hash.new 
+      event_label = {:entry => 'unchecked', :exit => 'unchecked', :post => 'unchecked'}
+      
+      if rel.count > 0
+        event[:entry] = true if rel[0].event_entry
+        event[:exit] = true if rel[0].event_exit
+        event[:post] = true if rel[0].event_post
+        event[:disabled] = false
 
-<p>
-  <strong>Profile img:</strong>
-  <%= @user.profile_img %>
-</p>
+        event_label[:entry] = 'checked' if rel[0].event_entry
+        event_label[:exit] = 'checked' if rel[0].event_exit
+        event_label[:post] = 'checked' if rel[0].event_post
+      end
+  %>
+  <div class="btn-group btn-group-justified">
+        <%= link_to "진입알림 "+event_label[:entry] , user_path(@user,:alarm => 'event_entry',:checked => event[:entry]), :id => 'event_entry', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+  </div>
+  <div class="btn-group btn-group-justified">
+        <%= link_to "이탈알림 "+event_label[:exit] , user_path(@user,:alarm => 'event_exit',:checked => event[:exit]), :id => 'event_exit', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+  </div>
+  <div class="btn-group btn-group-justified">
+        <%= link_to "새글알림 "+event_label[:post] , user_path(@user,:alarm => 'event_post',:checked => event[:post]), :id => 'event_post', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+  </div>
+<%else %>
+<%end %>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>

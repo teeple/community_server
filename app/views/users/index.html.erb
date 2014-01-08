@@ -39,14 +39,20 @@
   <% @users.each do |user| %>
     <div class="row">
       <div class="col-xs-4">
-        <a href="user.html">
-          <img style="width:100%;height:100px;" src="http://fmkorea.net/files/attach/images/3655109/494/914/033/de229fde613990d128d9b5c4c7f8455c.jpg" alt="....">
+        <a href="<%= user_path(user)%>">
+          <%= image_tag user.avatar.url(:medium) %>
         </a>
       </div>
       <div class="col-xs-7 well" style="vertical-align:middle;"><p >안녕하세요~ 저는 누구누구입니다. 어디어디 살구요. 무엇무엇 좋아해요 반가워요~</p></div>
     </div>
     <div class="row">
-        <div class="col-xs-4" style="text-align:center;"><a href="user.html" align="center"><em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>"><%= user.user_name %></em></a></div>
+        <div class="col-xs-4" style="text-align:center;">
+          <a href="<%= user_path(user)%>" align="center">
+            <em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>">
+              <%= user.user_name %>
+            </em>
+          </a>
+        </div>
         <div class="col-xs-8">Follower <span class="badge"><%= user.relations.count %></span></div>
     </div>
     <div class="row"><div class="col-xs-12"><hr></div></div>

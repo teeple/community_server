@@ -62,8 +62,8 @@ class User < ActiveRecord::Base
         
         if tracking_response.code == 200
           tracking_result = xml_parser.parse(tracking_response.body)
-          logger.debug("---------------------")
-          logger.debug(tracking_result)
+          # logger.debug("---------------------")
+          # logger.debug(tracking_result)
         end
       end
     end
