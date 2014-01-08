@@ -70,7 +70,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to setting_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to setting_path, notice: '프로필 수정이 완료되었습니다' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

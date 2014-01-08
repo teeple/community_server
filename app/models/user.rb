@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
  # include SessionsHelper
   attr_accessor :remote_ip
-  paginates_per 3
+  paginates_per 7
 
   has_many :messages
   has_many :message_flags
@@ -58,6 +58,13 @@ class User < ActiveRecord::Base
         self.imsi = imsi
         self.ecgi = ecgi
 
+        tracking_response = Apis.tracking_on(imsi,ecgi)
+        
+        if tracking_response.code == 200
+          tracking_result = xml_parser.parse(tracking_response.body)
+          logger.debug("---------------------")
+          logger.debug(tracking_result)
+        end
       end
     end
   end

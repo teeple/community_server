@@ -1,4 +1,4 @@
-@tested
+@test2 @tested 
 
 Feature: Sign Up
   Scenario: 전화번호 미입력

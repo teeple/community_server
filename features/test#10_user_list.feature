@@ -1,3 +1,5 @@
+@test10 @tested
+
 Feature: User List
   Scenario: Follower 리스트 
     Given 가입자

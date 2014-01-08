@@ -1,6 +1,10 @@
 class ApisController < ApplicationController
   before_action :set_api, only: [:show, :edit, :update, :destroy]
   
+  def tracking_on
+   @api = Api.all.first
+  end
+
   def imsi_ecgi
     @api = Api.find_by_ip(params[:IP])
   end
@@ -14,7 +18,6 @@ class ApisController < ApplicationController
   # GET /apis/1
   # GET /apis/1.json
   def show
-    debugger
   end
 
   # GET /apis/new
