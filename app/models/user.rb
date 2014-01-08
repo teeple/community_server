@@ -3,9 +3,6 @@ class User < ActiveRecord::Base
   attr_accessor :remote_ip
   paginates_per 3
 
-  # after_create :test_aa
-  after_create :save_imsi_ecgi
-
   has_many :messages
   has_many :message_flags
   has_many :relations, class_name: 'Relation', foreign_key: :user_from, dependent: :destroy
@@ -31,6 +28,8 @@ class User < ActiveRecord::Base
             :presence => true
 
   validate :validate_imsi_ecgi, on: :create
+
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
 
   def self.followers(user, page_num)
     user.users.order("user_name asc").page(page_num)
@@ -70,10 +69,4 @@ class User < ActiveRecord::Base
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end
-
-  def save_imsi_ecgi
-    logger.debug self.imsi
-    logger.debug self.ecgi
-  end
-
 end

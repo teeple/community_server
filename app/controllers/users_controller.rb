@@ -18,9 +18,6 @@ class UsersController < ApplicationController
 
     page_num = params[:page]? params[:page] : 1
 
-    logger.debug '######'
-    logger.debug @current_user
-    logger.debug page_num
     case params[:tab]
       when 'not_followers'
         @users = User.not_followers(@current_user,page_num)
@@ -29,6 +26,12 @@ class UsersController < ApplicationController
       else      
         @users = User.followers(@current_user,page_num)        
     end
+  end
+
+  def setting
+    #temp current user
+    #@user = @current_user
+    @user = User.first
   end
 
   # GET /users/1
@@ -67,7 +70,7 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to setting_path, notice: 'User was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -94,7 +97,8 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:user_name, :phone_no, :imsi, :ecgi, :description, :profile_img)
+      params.require(:user).permit(:user_name, :phone_no, :imsi, :ecgi, :description, :profile_img, :avatar)
     end
+
 
 end

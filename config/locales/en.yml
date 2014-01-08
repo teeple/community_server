@@ -33,7 +33,7 @@ en:
     submit:
       user:
         create: "회원가입"
-        update: "Update"
+        update: "저장"
   activerecord:
     attributes:
       user:

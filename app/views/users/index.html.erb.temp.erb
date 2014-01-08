@@ -1,9 +1,4 @@
-<head>
-  <title>WARP Community</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
- 
+
 <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
   <!-- Brand and toggle get grouped for better mobile display -->
   <div class="navbar-header">
@@ -13,11 +8,11 @@
       <span class="icon-bar"></span>
       <span class="icon-bar"></span>
     </button>
-    <a class="navbar-brand" href="#">Users</a>
+    <a class="navbar-brand" href="#">WARP Community</a>
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <div class="collapse navbar-collapse" id="nav_bar">
     <ul class="nav navbar-nav">
       <li><a href="message.html">Message</a></li>
       <li><a href="users.html">User</a></li>
@@ -28,6 +23,13 @@
 </nav>
 <div class="nav-padding"></div>
 
+<!--<div class="bs-example">
+  <div class="btn-group btn-group-justified">
+    <a class="btn btn-primary" role="button" id="tab_btn_followers" data-target="#tab_content_followers" href="#nav_bar">Followers</a>
+    <a class="btn btn-default" role="button" id="tab_btn_not_followers" data-target="#tab_content_not_followers" href="#nav_bar">Not Followers</a>
+    <a class="btn btn-default" role="button" id="tab_btn_cafes" data-target="#tab_content_cafes" href="#nav_bar">Cafes</a>
+  </div>
+</div>-->
 <div class="btn-group btn-group-justified">
   <a class="btn <%= @tab_class[:followers] %>" role="button" id="tab_btn_followers" href="/users?tab=followers">Followers</a>
   <a class="btn <%= @tab_class[:not_followers] %>" role="button" id="tab_btn_not_followers"  href="/users?tab=not_followers">Not Followers</a>
@@ -60,4 +62,5 @@
     </div>
   </div>
 </div>
-  
+
+

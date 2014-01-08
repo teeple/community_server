@@ -24,6 +24,10 @@ module ComDev
     #...
     # assign log4r's logger as rails' logger.
     config.autoload_paths += %W(#{config.root}/lib)
+    # config.paperclip_defaults = {
+    #     :storage => :fog, 
+    #     :fog_credentials => {:provider => "Local", :local_root => "#{Rails.root}/public"}, :fog_directory => "", :fog_host => "localhost"
+    # }
   end
 end
 

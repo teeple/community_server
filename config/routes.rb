@@ -4,6 +4,8 @@ ComDev::Application.routes.draw do
 
   get 'Management/IMSI', to: 'apis#imsi_ecgi'
 
+  get 'setting', to:'users#setting'
+
   resources :apis,     only: [:new, :create, :destroy, :show]
 
   # get 'Management/IMSI' , :to => 'apis#get_imsi_ecgi'
