@@ -48,11 +48,18 @@ class UsersController < ApplicationController
     @tab = params[:tab]? params[:tab] : 'profile'
     @tab_class[@tab.to_sym] = 'btn-primary'
 
+    
     respond_to do |format|
       if params[:alarm]
         @rel = @current_user.relations.where(:user_from => @current_user.id, :user_to => @user.id)[0]
-        eval_str = "@rel."+params[:alarm]+"=!"+params[:checked]
-        eval(eval_str)
+        case params[:alarm]
+          when 'event_entry'
+            @rel.event_entry =! @rel.event_entry
+          when 'event_exit'
+            @rel.event_exit =! @rel.event_exit
+          when 'event_post'
+            @rel.event_post =! @rel.event_post
+        end
         @rel.save
         @event_type = params[:alarm]
         format.js {render action: 'show'}

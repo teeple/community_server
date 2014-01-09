@@ -55,53 +55,6 @@
 </div>
 <br/>
 
-<%if @tab_class[:profile] == "btn-primary" %>
-  <div class="container">
-    <div class="row-fluid">
-      <div class="col-xs-1"></div>
-      <div class="col-xs-10"><%=@user.description%></div>
-      <div class="col-xs-1"></div>
-    </div>
-    <div class="row-fluid">
-      <div class="col-xs-6 text-center border-right">
-        <div><h1><%=@user.users.count%></h1></div>
-        Followers
-      </div>
-      <div class="col-xs-6 text-center">
-        <div>picture</div>
-        <div>Following</div>
-      </div>
-    </div>
-  </div>
+<%= render "show_relation" %>
 
-  </br>
-  <% rel = @current_user.relations.where(:user_from => @current_user.id, :user_to => @user.id)
-      event = Hash.new 
-      event = {:entry => false, :exit => false, :post => false, :disabled => true }
-
-      event_label = Hash.new 
-      event_label = {:entry => 'unchecked', :exit => 'unchecked', :post => 'unchecked'}
-      
-      if rel.count > 0
-        event[:entry] = true if rel[0].event_entry
-        event[:exit] = true if rel[0].event_exit
-        event[:post] = true if rel[0].event_post
-        event[:disabled] = false
-
-        event_label[:entry] = 'checked' if rel[0].event_entry
-        event_label[:exit] = 'checked' if rel[0].event_exit
-        event_label[:post] = 'checked' if rel[0].event_post
-      end
-  %>
-  <div class="btn-group btn-group-justified">
-        <%= link_to "진입알림 "+event_label[:entry] , user_path(@user,:alarm => 'event_entry',:checked => event[:entry]), :id => 'event_entry', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
-  </div>
-  <div class="btn-group btn-group-justified">
-        <%= link_to "이탈알림 "+event_label[:exit] , user_path(@user,:alarm => 'event_exit',:checked => event[:exit]), :id => 'event_exit', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
-  </div>
-  <div class="btn-group btn-group-justified">
-        <%= link_to "새글알림 "+event_label[:post] , user_path(@user,:alarm => 'event_post',:checked => event[:post]), :id => 'event_post', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
-  </div>
-<%else %>
-<%end %>
 

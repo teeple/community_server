@@ -1,15 +1,1 @@
-<%
-checked = 'checked'
-unchecked = 'unchecked'
-
-case @event_type
-	when 'event_entry'
-		replace_text = '진입알림 '+ (@rel.event_entry ? checked : unchecked)
-	when 'event_exit'
-		replace_text = '이탈알림 '+ (@rel.event_exit ? checked : unchecked)
-	when 'event_post'
-		replace_text = '새글알림 '+ (@rel.event_post ? checked : unchecked)
-end
-%>
-
-$('#<%=@event_type%>').text('<%=replace_text%>');
+$('#show_relation').html("<%= escape_javascript(render 'show_relation') %>");
