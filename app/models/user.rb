@@ -3,8 +3,8 @@ class User < ActiveRecord::Base
   attr_accessor :remote_ip
   paginates_per 7
 
-  has_many :messages
-  has_many :message_flags
+  has_many :messages, class_name: 'Message', foreign_key: :user_id, dependent: :destroy
+  has_many :message_flags,  class_name: 'MessageFlag', foreign_key: :user_from, dependent: :destroy
   has_many :relations, class_name: 'Relation', foreign_key: :user_from, dependent: :destroy
   has_many :users, through: :relations
   
@@ -33,6 +33,10 @@ class User < ActiveRecord::Base
 
   def self.followers(user, page_num)
     user.users.order("user_name asc").page(page_num)
+  end
+
+  def self.my_followers(user)
+    Relation.where(:user_to => user.id)
   end
 
   def self.my_followers_count(user)

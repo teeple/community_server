@@ -5,7 +5,12 @@ class MessagesController < ApplicationController
   # GET /messages
   # GET /messages.json
   def index
-    @messages = Message.all
+    #temp current user
+    @current_user = User.first
+
+    page_num = params[:page]? params[:page] : 1
+
+    @messages = Message.my_messages(@current_user,page_num)
   end
 
   # GET /messages/1
@@ -26,7 +31,7 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     #temp current user
-    @current_user = User.last
+    @current_user = User.find(23)
     
     @message = @current_user.messages.build(message_params)
     

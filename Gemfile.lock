@@ -87,6 +87,7 @@ GEM
     mini_portile (0.5.2)
     minitest (4.7.5)
     multi_json (1.8.2)
+    mysql2 (0.3.14)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     nori (2.3.0)
@@ -196,6 +197,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   log4r
+  mysql2
   nori
   paperclip
   rack-test

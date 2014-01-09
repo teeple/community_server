@@ -1,31 +1,48 @@
-<h1>Listing messages</h1>
+<%= render "/shared/common_header", title: "Messages"%>
+<br/>
 
-<table>
-  <thead>
-    <tr>
-      <th>Message</th>
-      <th>Message img</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<!-- follower list -->
+<div class="container" id="content_users">
+  <% @messages.each do |message| %>
+    <%= message.user_id %>
+    <% user = User.find(message.user_id) %>
+    <div class="row">
+      <div class="col-xs-4">
+        <a href="<%= user_path(user)%>">
+          <%= image_tag user.avatar.url(:medium) %>
+        </a>
+      </div>
+      <div class="col-xs-7 well" style="vertical-align:middle;">
+        <p><%=message.message%></p>
+        <%if message.attached_img_file_name %>
+          <%= image_tag message.attached_img.url(:medium) %>
+        <%end%>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4" style="text-align:center;">
+          <a href="<%= user_path(user)%>" align="center">
+            <em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>">
+              <%= user.user_name %>
+            </em>
+          </a>
+        </div>
+        <div class="col-xs-8">Follower <span class="badge"><%= User.my_followers_count(user) %></span></div>
+    </div>
+    <div class="row"><div class="col-xs-12"><hr></div></div>
+  <% end %>
+  <br/>
+  <!-- paging -->
+  <div class="row">
+    <div class="col-xs-12">
+      <%= paginate @messages ,:window => 1%>
+      <br/>
+    </div>
+  </div>
+</div>
 
-  <tbody>
-    <% @messages.each do |message| %>
-      <tr>
-        <td><%= message.message %></td>
-        <td><%= message.message_img %></td>
-        <td><%= message.user_id %></td>
-        <td><%= link_to 'Show', message %></td>
-        <td><%= link_to 'Edit', edit_message_path(message) %></td>
-        <td><%= link_to 'Destroy', message, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Message', new_message_path %>
+<div class="row-fluid navbar-fixed-bottom btn-group btn-group-justified">
+  <div class="navbar-inner navbar-content-center">
+    <%= link_to "Write" , new_message_path, :class => 'btn btn-primary', :role=>'button'%>
+  </div>
+</div>

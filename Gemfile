@@ -71,4 +71,4 @@ gem 'dotenv-rails'
 gem 'nori'
 gem 'paperclip'
 gem 'cocaine' 
-
+gem 'mysql2'

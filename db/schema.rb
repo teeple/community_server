@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109045020) do
+ActiveRecord::Schema.define(version: 20140109102352) do
 
   create_table "apis", force: true do |t|
     t.string   "ip"
@@ -23,14 +23,14 @@ ActiveRecord::Schema.define(version: 20140109045020) do
 
   create_table "message_flags", force: true do |t|
     t.integer  "message_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_from"
+    t.integer  "user_to"
   end
 
-  add_index "message_flags", ["message_id"], name: "index_message_flags_on_message_id"
-  add_index "message_flags", ["user_id", "message_id"], name: "index_message_flags_on_user_id_and_message_id"
-  add_index "message_flags", ["user_id"], name: "index_message_flags_on_user_id"
+  add_index "message_flags", ["message_id"], name: "index_message_flags_on_message_id", using: :btree
+  add_index "message_flags", ["message_id"], name: "index_message_flags_on_user_id_and_message_id", using: :btree
 
   create_table "messages", force: true do |t|
     t.string   "message"
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20140109045020) do
     t.datetime "attached_img_updated_at"
   end
 
-  add_index "messages", ["user_id"], name: "index_messages_on_user_id"
+  add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
 
   create_table "relations", force: true do |t|
     t.integer  "user_from"
@@ -56,9 +56,9 @@ ActiveRecord::Schema.define(version: 20140109045020) do
     t.datetime "updated_at"
   end
 
-  add_index "relations", ["user_from", "user_to"], name: "index_relations_on_user_from_and_user_to"
-  add_index "relations", ["user_from"], name: "index_relations_on_user_from"
-  add_index "relations", ["user_to"], name: "index_relations_on_user_to"
+  add_index "relations", ["user_from", "user_to"], name: "index_relations_on_user_from_and_user_to", using: :btree
+  add_index "relations", ["user_from"], name: "index_relations_on_user_from", using: :btree
+  add_index "relations", ["user_to"], name: "index_relations_on_user_to", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "user_name"
@@ -77,6 +77,6 @@ ActiveRecord::Schema.define(version: 20140109045020) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
 end
