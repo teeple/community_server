@@ -50,18 +50,30 @@ class UsersController < ApplicationController
 
     
     respond_to do |format|
-      if params[:alarm]
-        @rel = @current_user.relations.where(:user_from => @current_user.id, :user_to => @user.id)[0]
-        case params[:alarm]
+      if params[:trigger_element]
+        trigger_element = params[:trigger_element]
+        
+        @rel = @current_user.relations.where(:user_from => @current_user.id, :user_to => @user.id)
+
+        if trigger_element == 'following'
+          if @rel.count == 0
+            @rel = Relation.create!(:user_from => @current_user.id, :user_to=> @user.id)
+          else
+            @rel = @rel[0]
+            @rel.destroy
+          end
+        else
+          @rel = @rel[0]
+          case trigger_element
           when 'event_entry'
             @rel.event_entry =! @rel.event_entry
           when 'event_exit'
             @rel.event_exit =! @rel.event_exit
           when 'event_post'
             @rel.event_post =! @rel.event_post
+          end
+          @rel.save
         end
-        @rel.save
-        @event_type = params[:alarm]
         format.js {render action: 'show'}
       else
         format.html { render action: 'show' }
