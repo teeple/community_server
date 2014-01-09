@@ -1,0 +1,33 @@
+<div id="show_message">
+  <%if @tab_class[:message] == "btn-primary" %>
+    <div class="container" id="content_messages">
+      <% @messages.each do |message| %>
+        <div class="row">
+          <div class="col-xs-4">
+              <%= image_tag @user.avatar.url(:medium) %>
+          </div>
+          <div class="col-xs-7 well" style="vertical-align:middle;">
+            <p><%= message.message %></p></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4" style="text-align:center;">
+              <a href="<%= user_path(@user)%>" align="center">
+                <em id="user_id_<%=@user.id%>" value="user_id_<%=@user.id%>">
+                  <%= @user.user_name %>
+                </em>
+              </a>
+            </div>
+        </div>
+        <div class="row"><div class="col-xs-12"><hr></div></div>
+      <% end %>
+      <br/>
+      <!-- paging -->
+      <div class="row">
+        <div class="col-xs-12">
+          <%= paginate @messages, :window => 1%>
+          <br/>
+        </div>
+      </div>
+    </div>
+  <%end %>
+</div>

@@ -48,8 +48,9 @@ class UsersController < ApplicationController
     @tab = params[:tab]? params[:tab] : 'profile'
     @tab_class[@tab.to_sym] = 'btn-primary'
 
-    
     respond_to do |format|
+
+      # following, alarm event를 선택했을 
       if params[:trigger_element]
         trigger_element = params[:trigger_element]
         
@@ -76,6 +77,11 @@ class UsersController < ApplicationController
         end
         format.js {render action: 'show'}
       else
+        if params[:tab] == 'message'
+          page_num = params[:page]? params[:page] : 1
+          @messages = @user.messages.page(page_num)
+        end
+
         format.html { render action: 'show' }
       end
     end

@@ -47,13 +47,13 @@
     </br>
     
     <div class="btn-group btn-group-justified">
-          <%= link_to "진입알림 "+event_label[:entry] , user_path(@user,:trigger_element => 'event_entry'), :id => 'event_entry', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+          <%= link_to "진입알림 "+event_label[:entry] , user_path(@user,:trigger_element => 'event_entry', :tab => 'profile'), :id => 'event_entry', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
     </div>
     <div class="btn-group btn-group-justified">
-          <%= link_to "진입알림 "+event_label[:exit] , user_path(@user,:trigger_element => 'event_exit'), :id => 'event_exit', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+          <%= link_to "진입알림 "+event_label[:exit] , user_path(@user,:trigger_element => 'event_exit', :tab => 'profile'), :id => 'event_exit', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
     </div>
     <div class="btn-group btn-group-justified">
-          <%= link_to "새글알림 "+event_label[:post] , user_path(@user,:trigger_element => 'event_post'), :id => 'event_post', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+          <%= link_to "새글알림 "+event_label[:post] , user_path(@user,:trigger_element => 'event_post', :tab => 'profile'), :id => 'event_post', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
     </div>
   <%else %>
   <%end %>
