@@ -34,6 +34,9 @@ en:
       user:
         create: "회원가입"
         update: "저장"
+      message:
+        create: "Post"
+        update: "저장"
   activerecord:
     attributes:
       user:

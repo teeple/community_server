@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user
+  #before_action :signed_in_user
   
   # GET /messages
   # GET /messages.json
@@ -25,11 +25,14 @@ class MessagesController < ApplicationController
   # POST /messages
   # POST /messages.json
   def create
-    @message = Message.new(message_params)
-
+    #temp current user
+    @current_user = User.last
+    
+    @message = @current_user.messages.build(message_params)
+    
     respond_to do |format|
       if @message.save
-        format.html { redirect_to @message, notice: 'Message was successfully created.' }
+        format.html { redirect_to new_message_path, notice: '새 글이 등록되었습니다' }
         format.json { render action: 'show', status: :created, location: @message }
       else
         format.html { render action: 'new' }
@@ -70,6 +73,6 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:message, :message_img, :user_id)
+      params.require(:message).permit(:message, :message_img, :user_id,:attached_img)
     end
 end

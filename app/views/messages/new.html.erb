@@ -1,5 +1,52 @@
-<h1>New message</h1>
+<%= render "/shared/common_header", title: "Messages" %>
 
-<%= render 'form' %>
+<!-- message -->
+<%= form_for @message, :method => "post", :html => { :multipart => true } do |form| %>
+  <div class="container">
+    <div class="row-fluid">
+      <div>
+        <div class="form-group">
+          <div class="controls">
+            <label>메시지 입력</label>
+            <%= form.text_area :message,:class=> 'form-control', :rows => '5' ,:maxlength =>140 ,:placeholder => "지금 무엇을 하고 있나요?"%> <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<%= link_to 'Back', messages_path %>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-10 text-center">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+          <div class="fileinput-new thumbnail">
+            <img class="img-responsive" alt="...">
+          </div>
+          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 200px;"></div>
+          <div>
+            <br/>
+            <span class="btn btn-default btn-file"><span class="fileinput-new">이미지 추가</span><span class="fileinput-exists">변경</span>
+              <%= form.file_field :attached_img %>
+            </span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">취소</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-1"></div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row-fluid">
+      <div>
+        <div class="form-group">
+          <div class="controls">
+            <%= form.submit :class=> "btn pull-right btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

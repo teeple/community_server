@@ -27,7 +27,7 @@
       </div>
       <div class="row-fluid">
         <div class="col-xs-6 text-center border-right">
-          <div><h1><%=@user.users.count%></h1></div>
+          <div><h1><%=User.my_followers_count(@user)%></h1></div>
           Followers
         </div>
         <div class="col-xs-6 text-center">

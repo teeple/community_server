@@ -35,6 +35,10 @@ class User < ActiveRecord::Base
     user.users.order("user_name asc").page(page_num)
   end
 
+  def self.my_followers_count(user)
+    Relation.where(:user_to => user.id).count
+  end
+
   def self.not_followers(user, page_num)
     #User.where.not(id: user.id).where(user_type: false).where.not(id: user.users.pluck(:id)).page(page_num)
     User.users_general_without(user.id).where.not(id: User.users_with_relationship(user)).page(page_num)
