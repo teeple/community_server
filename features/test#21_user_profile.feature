@@ -1,3 +1,4 @@
+@tested
 
 Feature: User Profile
   Scenario: User Profile 화면
