@@ -12,3 +12,26 @@ $nav-padding:50px;
 .border-left{
 	border-left: 1px solid;
 }
+
+.glyphicon{
+	color:blue;
+	background-color:transparent;
+}
+
+.timepicker-picker > a{
+	background-color:transparent;
+}
+
+a:hover, a:focus{
+	color:transparent;
+	background-color:transparent;
+}
+
+.bootstrap-datetimepicker-widget .btn{
+	background-color:transparent;
+}
+
+.bootstrap-datetimepicker-widget .btn-primary{
+	background-color: #428bca;
+	border-color: #357ebd;
+}
