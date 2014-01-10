@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
   belongs_to :user
-  has_many :message_flags
+  has_many :message_flags,  class_name: 'MessageFlag', dependent: :destroy
 
   paginates_per 7
 

@@ -40,7 +40,7 @@
   <div class="container">
     <div class="row">
       <div class='input-group date' id='datetimepicker'>
-        <input type='text' class="form-control" name="temp_time" placeholder="유효기간" data-format="YYYY/MM/DD HH:mm:ss"/>
+        <%= form.text_field :expired_at ,:placeholder=>"유효기간",:class=>"form-control" ,"data-format"=>"YYYY/MM/DD HH:mm:ss"%>
         <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
         </span>
       </div>

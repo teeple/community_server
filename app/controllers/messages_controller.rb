@@ -78,6 +78,7 @@ class MessagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def message_params
-      params.require(:message).permit(:message, :message_img, :user_id,:attached_img)
+      params.require(:message).permit(:message, :message_img, :user_id,:attached_img,:expired_at)
+      # params[:message][:expired_at] = params[:message][:expired_at].to_datetime
     end
 end

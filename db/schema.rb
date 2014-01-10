@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140109102352) do
+ActiveRecord::Schema.define(version: 20140110043156) do
 
   create_table "apis", force: true do |t|
     t.string   "ip"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140109102352) do
     t.string   "attached_img_content_type"
     t.integer  "attached_img_file_size"
     t.datetime "attached_img_updated_at"
+    t.datetime "expired_at"
   end
 
   add_index "messages", ["user_id"], name: "index_messages_on_user_id", using: :btree
