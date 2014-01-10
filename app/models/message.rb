@@ -9,12 +9,14 @@ class Message < ActiveRecord::Base
   after_create :make_message_as_unread
   
   def self.my_messages(user, page_num)
-	#User.users_cafe_without(user.id).where.not(id: User.users_with_relationship(user)).page(page_num)
-  Message.all.page(page_num)
+	  #Message.all.page(page_num)
+  end
+
+  def self.friends_messages(user,page_num)
+    Message.all.where(:user_id => user.users.pluck(:id)).order("created_at desc").page(page_num)
   end
 
   def make_message_as_unread
-    #MessageFlag.create(:user_from => self.user_id,)
     User.my_followers(self.user).each do |relation|
       MessageFlag.create(:message_id => self.id, :user_from => self.user.id, :user_to => relation.user_from)
     end

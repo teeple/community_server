@@ -56,7 +56,8 @@ module CommonHelpers
   end
 
   def create_related_user(user_from,user_type,postfix,following)
-    user = User.create!(:user_name => 'user' + postfix, :phone_no => '010111122' + postfix, :imsi => '11' + postfix, :ecgi => '11' + postfix, :user_type => user_type)
+    user_name = (user_type == true)? 'cafe': 'user'
+    user = User.create!(:user_name => user_name + postfix, :phone_no => '010111122' + postfix, :imsi => '11' + postfix, :ecgi => '11' + postfix, :user_type => user_type)
     Relation.create!(:user_from => user_from, :user_to => user.id) if following
     user
   end

@@ -2,7 +2,7 @@
 <br/>
 
 <!-- follower list -->
-<div class="container" id="content_users">
+<div class="container" id="content_messages">
   <% @messages.each do |message| %>
     <%= message.user_id %>
     <% user = User.find(message.user_id) %>
@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-
+<br/><br/><br/><br/>
 <div class="row-fluid navbar-fixed-bottom btn-group btn-group-justified">
   <div class="navbar-inner navbar-content-center">
     <%= link_to "Write" , new_message_path, :class => 'btn btn-primary', :role=>'button'%>

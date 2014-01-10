@@ -10,7 +10,7 @@ class MessagesController < ApplicationController
 
     page_num = params[:page]? params[:page] : 1
 
-    @messages = Message.my_messages(@current_user,page_num)
+    @messages = Message.friends_messages(@current_user,page_num)
   end
 
   # GET /messages/1

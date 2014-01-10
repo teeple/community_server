@@ -1,4 +1,4 @@
-@test2 @tested 
+@test2 @tested
 
 Feature: Sign Up
   Scenario: 전화번호 미입력
@@ -58,6 +58,4 @@ Feature: Sign Up
       And 아이디, 전화번호 입력 
      When 회원가입 클릭
      Then 사용자 설정 페이지로 이동
-      And 가입을 축하합니다 출력 
-
-  
+      And 가입을 축하합니다 출력
