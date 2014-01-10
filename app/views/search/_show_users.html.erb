@@ -1,0 +1,40 @@
+<!-- follower list -->
+<%if @tab_class[:users] == "btn-primary" %>
+  <% if @users %>
+    <div class="container" id="content_users">
+      <% @users.each do |user| %>
+        <div class="row">
+          <div class="col-xs-4">
+            <a href="<%= user_path(user)%>">
+              <%= image_tag user.avatar.url(:medium) %>
+            </a>
+          </div>
+          <div class="col-xs-7 well" style="vertical-align:middle;"><p ><%= user.description %></p></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4" style="text-align:center;">
+              <a href="<%= user_path(user)%>" align="center">
+                <em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>">
+                  <%= user.user_name %>
+                </em>
+              </a>
+            </div>
+            <div class="col-xs-8">Follower <span class="badge"><%= User.my_followers_count(user) %></span></div>
+        </div>
+        <div class="row"><div class="col-xs-12"><hr></div></div>
+      <% end %>
+      <br/>
+      <!-- paging -->
+      <!-- paging -->
+      <div class="row">
+        <div class="col-xs-12">
+          <%= paginate @users ,:window => 1%>
+          <br/>
+        </div>
+      </div>
+  </div>
+  <% else %>
+      no search result
+  <% end 
+  end %>
+  

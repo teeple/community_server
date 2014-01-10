@@ -6,6 +6,8 @@ ComDev::Application.routes.draw do
 
   get 'setting', to:'users#setting'
 
+  get 'search', to:'search#search'
+
   resources :apis,     only: [:new, :create, :destroy, :show]
 
   resources :message_flags

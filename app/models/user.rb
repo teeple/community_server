@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
  # include SessionsHelper
   attr_accessor :remote_ip
-  paginates_per 7
+  paginates_per 5
 
   has_many :messages, class_name: 'Message', foreign_key: :user_id, dependent: :destroy
   has_many :message_flags,  class_name: 'MessageFlag', foreign_key: :user_from, dependent: :destroy
@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
   validate :validate_imsi_ecgi, on: :create
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+
+  def self.search(keyword,page_num)
+    User.where('description like ? or user_name like ?','%'+keyword+'%','%'+keyword+'%').order("user_name asc").page(page_num)
+  end
 
   def self.followers(user, page_num)
     user.users.order("user_name asc").page(page_num)

@@ -1,0 +1,19 @@
+<%= render "/shared/common_header", title: "User Profile" %>
+
+<!-- search input -->
+<%= form_tag search_path,:method => 'get'%>
+<div class="input-group">
+	<input name="tab" type="hidden" value="<%=@tab%>"/>
+	<%= text_field_tag :keyword, @keyword, :class => "form-control", :placeholder=> "Search" %>
+<span class="input-group-addon"><%= submit_tag 'Done'%></span>
+</div>
+
+<!-- tab -->
+<div class="btn-group btn-group-justified">
+  <a class="btn <%= @tab_class[:users] %>" role="button" id="tab_btn_users" href="<%= search_path%>?tab=users&keyword=<%=@keyword%>">Users</a>
+  <a class="btn <%= @tab_class[:messages] %>" role="button" id="tab_btn_message"  href="<%= search_path%>?tab=messages&keyword=<%=@keyword%>">Messages</a>
+</div>
+<br/>
+
+<%= render "show_users" %>
+<%= render "show_messages" %>
