@@ -4,7 +4,7 @@ class Message < ActiveRecord::Base
 
   paginates_per 7
 
-  has_attached_file :attached_img, :styles => { :medium => "300x300>"}
+  has_attached_file :attached_img
 
   after_create :make_message_as_unread
   
