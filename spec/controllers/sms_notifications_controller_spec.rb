@@ -23,7 +23,7 @@ describe SmsNotificationsController do
   # This should return the minimal set of attributes required to create a valid
   # SmsNotification. As you add validations to SmsNotification, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "receiver_user_id" => "MyString" } }
+  let(:valid_attributes) { { "receiver_user_id" => "1" } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -106,8 +106,8 @@ describe SmsNotificationsController do
         # specifies that the SmsNotification created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        SmsNotification.any_instance.should_receive(:update).with({ "receiver_user_id" => "MyString" })
-        put :update, {:id => sms_notification.to_param, :sms_notification => { "receiver_user_id" => "MyString" }}, valid_session
+        SmsNotification.any_instance.should_receive(:update).with({ "receiver_user_id" => "1" })
+        put :update, {:id => sms_notification.to_param, :sms_notification => { "receiver_user_id" => "1" }}, valid_session
       end
 
       it "assigns the requested sms_notification as @sms_notification" do

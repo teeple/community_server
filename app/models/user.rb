@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :message_flags,  class_name: 'MessageFlag', foreign_key: :user_from, dependent: :destroy
   has_many :relations, class_name: 'Relation', foreign_key: :user_from, dependent: :destroy
   has_many :users, through: :relations
+  has_many :sms_notifications, class_name: 'SmsNotification', foreign_key: :receiver_user_id
   
   scope :users_general, -> {where(user_type: false).order("user_name asc")}
   scope :users_cafe, -> {where(user_type: true).order("user_name asc")}

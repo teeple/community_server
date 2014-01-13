@@ -24,6 +24,9 @@ class Message < ActiveRecord::Base
   end
 
   def make_message_as_unread_and_send_noti
+    
+    sms_message = self.user.user_name + ' 님이 새 글을 등록하셨습니다. ' + ENV['COM_SERVER_URL'] + '/users/' + self.user.id.to_s + '?tab=message'
+            
     User.my_followers(self.user).each do |relation|
       MessageFlag.create(:message_id => self.id, :user_from => self.user.id, :user_to => relation.user_from)
 
@@ -38,6 +41,12 @@ class Message < ActiveRecord::Base
           ecgi = result['BODY']['ECGI']
           
           if self.user.ecgi == ecgi
+            SmsNotification.create!(
+              :receiver_user_id => follower.id, 
+              :sms_message => sms_message, 
+              :receiver_phone_no => follower.phone_no, 
+              :event_type => 'post', 
+              :status => 'N')
           end
         end
       end

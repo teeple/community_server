@@ -69,6 +69,6 @@ class SmsNotificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sms_notification_params
-      params.require(:sms_notification).permit(:receiver_user_id, :integer, :sms_message, :text, :receiver_phone_no, :string, :event_type, :string, :sent_at, :datetime, :status, :string, :error_reason)
+      params.require(:sms_notification).permit(:receiver_user_id, :sms_message, :receiver_phone_no, :event_type, :sent_at, :status, :error_reason)
     end
 end

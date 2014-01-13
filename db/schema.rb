@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113065016) do
+ActiveRecord::Schema.define(version: 20140113070250) do
 
   create_table "apis", force: true do |t|
     t.string   "ip"
@@ -62,17 +62,13 @@ ActiveRecord::Schema.define(version: 20140113065016) do
   add_index "relations", ["user_to"], name: "index_relations_on_user_to", using: :btree
 
   create_table "sms_notifications", force: true do |t|
-    t.string   "receiver_user_id"
-    t.string   "integer"
-    t.string   "sms_message"
-    t.string   "text"
+    t.integer  "receiver_user_id"
+    t.text     "sms_message"
     t.string   "receiver_phone_no"
-    t.string   "string"
     t.string   "event_type"
-    t.string   "sent_at"
-    t.string   "datetime"
+    t.datetime "sent_at"
     t.string   "status"
-    t.text     "error_reason"
+    t.string   "error_reason"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
