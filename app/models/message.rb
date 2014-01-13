@@ -26,6 +26,8 @@ class Message < ActiveRecord::Base
   def make_message_as_unread_and_send_noti
     
     sms_message = self.user.user_name + ' 님이 새 글을 등록하셨습니다. ' + ENV['COM_SERVER_URL'] + '/users/' + self.user.id.to_s + '?tab=message'
+
+    event = Event.create!(:event_type => 'post')
             
     User.my_followers(self.user).each do |relation|
       MessageFlag.create(:message_id => self.id, :user_from => self.user.id, :user_to => relation.user_from)
@@ -45,8 +47,9 @@ class Message < ActiveRecord::Base
               :receiver_user_id => follower.id, 
               :sms_message => sms_message, 
               :receiver_phone_no => follower.phone_no, 
-              :event_type => 'post', 
-              :status => 'N')
+              :event_type => event.event_type, 
+              :event_id => event.id,
+              :status => 'NEW')
           end
         end
       end

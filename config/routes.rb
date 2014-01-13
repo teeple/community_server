@@ -1,5 +1,7 @@
 ComDev::Application.routes.draw do
   
+  resources :events
+
   resources :sms_notifications
 
   get 'Management/IMSI', to: 'apis#imsi_ecgi'

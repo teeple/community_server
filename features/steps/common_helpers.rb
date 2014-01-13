@@ -62,4 +62,15 @@ module CommonHelpers
     user
   end
 
+  def create_my_follower(user_to, user_type, postfix, ecgi, event_post, event_entry, event_exit)
+    user_name = (user_type == true)? 'myfollower_cafe_': 'myfollower_user_'
+    user = User.create!(:user_name => user_name + postfix, :phone_no => '010111122' + postfix, :imsi => '11' + postfix, :ecgi => ecgi, :user_type => user_type)
+    Relation.create!(:user_from => user.id, :user_to => user_to.id, :event_post => event_post, :event_entry => event_entry, :event_exit => event_exit )
+    user
+  end
+
+  def create_user_in_api(imsi, ecgi)
+    api = Api.create!(:imsi => imsi, :ecgi => ecgi)
+  end
+
 end

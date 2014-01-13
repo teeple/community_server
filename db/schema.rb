@@ -11,12 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140113070250) do
+ActiveRecord::Schema.define(version: 20140113080535) do
 
   create_table "apis", force: true do |t|
     t.string   "ip"
     t.string   "imsi"
     t.string   "ecgi"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "events", force: true do |t|
+    t.string   "event_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,6 +77,7 @@ ActiveRecord::Schema.define(version: 20140113070250) do
     t.string   "error_reason"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
 
   create_table "users", force: true do |t|
