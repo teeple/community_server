@@ -1,8 +1,13 @@
 ComDev::Application.routes.draw do
   
+  resources :sms_notifications
+
   get 'Management/IMSI', to: 'apis#imsi_ecgi'
   #get 'Management/Tracking', to: 'apis#aaa'
   get 'Management/Tracking', to: 'apis#tracking_on'
+
+  # ECGI 정보 획득 via IMSI
+  get 'Management/ECGI', to: 'apis#location_fetch'
 
   get 'setting', to:'users#setting'
 

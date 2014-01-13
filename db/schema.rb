@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110043156) do
+ActiveRecord::Schema.define(version: 20140113065016) do
 
   create_table "apis", force: true do |t|
     t.string   "ip"
@@ -61,6 +61,22 @@ ActiveRecord::Schema.define(version: 20140110043156) do
   add_index "relations", ["user_from"], name: "index_relations_on_user_from", using: :btree
   add_index "relations", ["user_to"], name: "index_relations_on_user_to", using: :btree
 
+  create_table "sms_notifications", force: true do |t|
+    t.string   "receiver_user_id"
+    t.string   "integer"
+    t.string   "sms_message"
+    t.string   "text"
+    t.string   "receiver_phone_no"
+    t.string   "string"
+    t.string   "event_type"
+    t.string   "sent_at"
+    t.string   "datetime"
+    t.string   "status"
+    t.text     "error_reason"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
     t.string   "user_name"
     t.string   "phone_no"
@@ -76,6 +92,8 @@ ActiveRecord::Schema.define(version: 20140110043156) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.integer  "expire_day"
+    t.integer  "expire_hour"
   end
 
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree

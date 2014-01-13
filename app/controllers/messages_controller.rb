@@ -20,6 +20,8 @@ class MessagesController < ApplicationController
 
   # GET /messages/new
   def new
+    #temp current user
+    @current_user = User.first
     @message = Message.new
   end
 
@@ -31,7 +33,8 @@ class MessagesController < ApplicationController
   # POST /messages.json
   def create
     #temp current user
-    @current_user = User.find(23)
+    #@current_user = User.find(23)
+    @current_user = User.first
     
     @message = @current_user.messages.build(message_params)
     

@@ -10,4 +10,11 @@ module Apis
 		url += '/Management/Tracking'
 		RestClient.get url, {:params => {'IMSI' => imsi, 'ECGI' => ecgi},:content_type => :xml, :accept => :xml}
 	end
+
+	def self.location_fetch(imsi)
+		url = ENV['API_SERVER_HOST'] + ':' + ENV['API_SERVER_PORT']
+		url += '/Management/ECGI'
+		RestClient.get url, {:params => {'IMSI' => imsi}, :content_type => :xml, :accept => :xml}
+	end
+
 end

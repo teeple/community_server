@@ -1,0 +1,69 @@
+<%= form_for(@sms_notification) do |f| %>
+  <% if @sms_notification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sms_notification.errors.count, "error") %> prohibited this sms_notification from being saved:</h2>
+
+      <ul>
+      <% @sms_notification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :receiver_user_id %><br>
+    <%= f.text_field :receiver_user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :integer %><br>
+    <%= f.text_field :integer %>
+  </div>
+  <div class="field">
+    <%= f.label :sms_message %><br>
+    <%= f.text_field :sms_message %>
+  </div>
+  <div class="field">
+    <%= f.label :text %><br>
+    <%= f.text_field :text %>
+  </div>
+  <div class="field">
+    <%= f.label :receiver_phone_no %><br>
+    <%= f.text_field :receiver_phone_no %>
+  </div>
+  <div class="field">
+    <%= f.label :string %><br>
+    <%= f.text_field :string %>
+  </div>
+  <div class="field">
+    <%= f.label :event_type %><br>
+    <%= f.text_field :event_type %>
+  </div>
+  <div class="field">
+    <%= f.label :string %><br>
+    <%= f.text_field :string %>
+  </div>
+  <div class="field">
+    <%= f.label :sent_at %><br>
+    <%= f.text_field :sent_at %>
+  </div>
+  <div class="field">
+    <%= f.label :datetime %><br>
+    <%= f.text_field :datetime %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.text_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :string %><br>
+    <%= f.text_field :string %>
+  </div>
+  <div class="field">
+    <%= f.label :error_reason %><br>
+    <%= f.text_area :error_reason %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

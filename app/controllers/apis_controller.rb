@@ -9,6 +9,10 @@ class ApisController < ApplicationController
     @api = Api.find_by_ip(params[:IP])
   end
 
+  def location_fetch
+    @api = Api.find_by_imsi(params[:IMSI])
+  end
+
   # GET /apis
   # GET /apis.json
   def index

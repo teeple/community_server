@@ -1,12 +1,15 @@
 class Message < ActiveRecord::Base
+  include Apis
+
   belongs_to :user
+  before_save :set_expire_day_and_hour
   has_many :message_flags,  class_name: 'MessageFlag', dependent: :destroy
 
   paginates_per 5
 
   has_attached_file :attached_img
 
-  after_create :make_message_as_unread
+  after_create :make_message_as_unread_and_send_noti
   
   def self.search(keyword,page_num)
     Message.where('message like ?','%'+keyword+'%').order("created_at desc").page(page_num)
@@ -20,9 +23,35 @@ class Message < ActiveRecord::Base
     Message.all.where(:user_id => user.users.pluck(:id)).order("created_at desc").page(page_num)
   end
 
-  def make_message_as_unread
+  def make_message_as_unread_and_send_noti
     User.my_followers(self.user).each do |relation|
       MessageFlag.create(:message_id => self.id, :user_from => self.user.id, :user_to => relation.user_from)
+
+      if relation.event_post
+        # same zone check
+        follower = User.find(relation.user_from)
+        response = Apis.location_fetch(follower.imsi)  
+        if response.code == 200
+          xml_parser = Nori.new
+          
+          result = xml_parser.parse(response.body)
+          ecgi = result['BODY']['ECGI']
+          
+          if self.user.ecgi == ecgi
+          end
+        end
+      end
+    end
+  end
+
+
+  def set_expire_day_and_hour
+    case self.user.user_type
+      when true # user_type => cafe
+        # expired_at이 설정되어 있으면, 그 값을 사용하고, 그렇지 않으면 Profile의 expire day, hour를 가져와서 이를 활용
+        self.expired_at = Time.now + self.user.expire_day.day + self.user.expire_hour.hour unless self.expired_at
+      when false # user_type => general
+        self.expired_at = Time.now + ENV['EXPIRE_DAY'].to_i.day + ENV['EXPIRE_HOUR'].to_i.hour
     end
   end
 end

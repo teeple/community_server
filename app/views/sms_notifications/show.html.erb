@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Receiver user:</strong>
+  <%= @sms_notification.receiver_user_id %>
+</p>
+
+<p>
+  <strong>Integer:</strong>
+  <%= @sms_notification.integer %>
+</p>
+
+<p>
+  <strong>Sms message:</strong>
+  <%= @sms_notification.sms_message %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @sms_notification.text %>
+</p>
+
+<p>
+  <strong>Receiver phone no:</strong>
+  <%= @sms_notification.receiver_phone_no %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @sms_notification.string %>
+</p>
+
+<p>
+  <strong>Event type:</strong>
+  <%= @sms_notification.event_type %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @sms_notification.string %>
+</p>
+
+<p>
+  <strong>Sent at:</strong>
+  <%= @sms_notification.sent_at %>
+</p>
+
+<p>
+  <strong>Datetime:</strong>
+  <%= @sms_notification.datetime %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @sms_notification.status %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @sms_notification.string %>
+</p>
+
+<p>
+  <strong>Error reason:</strong>
+  <%= @sms_notification.error_reason %>
+</p>
+
+<%= link_to 'Edit', edit_sms_notification_path(@sms_notification) %> |
+<%= link_to 'Back', sms_notifications_path %>

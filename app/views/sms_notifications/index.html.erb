@@ -1,0 +1,51 @@
+<h1>Listing sms_notifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Receiver user</th>
+      <th>Integer</th>
+      <th>Sms message</th>
+      <th>Text</th>
+      <th>Receiver phone no</th>
+      <th>String</th>
+      <th>Event type</th>
+      <th>String</th>
+      <th>Sent at</th>
+      <th>Datetime</th>
+      <th>Status</th>
+      <th>String</th>
+      <th>Error reason</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sms_notifications.each do |sms_notification| %>
+      <tr>
+        <td><%= sms_notification.receiver_user_id %></td>
+        <td><%= sms_notification.integer %></td>
+        <td><%= sms_notification.sms_message %></td>
+        <td><%= sms_notification.text %></td>
+        <td><%= sms_notification.receiver_phone_no %></td>
+        <td><%= sms_notification.string %></td>
+        <td><%= sms_notification.event_type %></td>
+        <td><%= sms_notification.string %></td>
+        <td><%= sms_notification.sent_at %></td>
+        <td><%= sms_notification.datetime %></td>
+        <td><%= sms_notification.status %></td>
+        <td><%= sms_notification.string %></td>
+        <td><%= sms_notification.error_reason %></td>
+        <td><%= link_to 'Show', sms_notification %></td>
+        <td><%= link_to 'Edit', edit_sms_notification_path(sms_notification) %></td>
+        <td><%= link_to 'Destroy', sms_notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Sms notification', new_sms_notification_path %>
