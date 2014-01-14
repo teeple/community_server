@@ -73,3 +73,6 @@ gem 'paperclip'
 gem 'cocaine' 
 gem 'mysql2'
 gem 'awesome_print'
+gem "daemons"
+gem 'delayed_job'
+gem 'delayed_job_active_record'
