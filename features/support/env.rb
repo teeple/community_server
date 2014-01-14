@@ -12,8 +12,8 @@ require 'show_me_the_cookies'
 require './features/steps/common_helpers.rb'
 require 'ruby-debug'
 
-#require 'database_cleaner'
-#DatabaseCleaner.strategy = :truncation
+require 'database_cleaner'
+DatabaseCleaner.strategy = :truncation
 Spinach.hooks.before_scenario do DatabaseCleaner.clean 
   ShowMeTheCookies 
 end

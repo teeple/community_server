@@ -1,5 +1,16 @@
 module CommonHelpers
   include Rack::Test::Methods
+  
+  def clear_all_database
+    User.destroy_all
+    Message.destroy_all
+    Relation.destroy_all
+    MessageFlag.destroy_all
+    SmsNotification.destroy_all
+    Api.destroy_all
+    Event.destroy_all
+  end
+  
   def app
     Rails.application
   end

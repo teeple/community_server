@@ -24,17 +24,29 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+   xml_parser = Nori.new
+   result = xml_parser.parse(request.body.read)
+   imsi = result['BODY']['IMSI']
+   event_type = result['BODY']['EVENT']
 
-    respond_to do |format|
-      if @event.save
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @event }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
-      end
-    end
+   # create event instance
+   case event_type
+    when 'IN'
+      @event = Event.create!(:event_type => 'entry')
+    when 'OUT'
+      @event = Event.create!(:event_type => 'exit')
+    else 
+      render status: 500
+   end
+
+   # get user with imsi
+   user = User.find_by_imsi(imsi)
+
+   # find followers
+   followers = user.my_followers
+   
+
+   render nothing: true
   end
 
   # PATCH/PUT /events/1
