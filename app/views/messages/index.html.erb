@@ -13,6 +13,16 @@
         </a>
       </div>
       <div class="col-xs-7 well" style="vertical-align:middle;">
+        <%= user.user_name %>
+        <% if user.user_type %>
+          &nbsp;<span class="badge">Cafe</span>
+        <% end %>
+
+        <% if Message.check_unread_and_make_it_read(message,@current_user) %>
+          &nbsp;<span class="badge">New</span>
+        <% end %>
+        <br/>
+        <%= message.created_at %>
         <p><%=message.message%></p>
         <%if message.attached_img_file_name %>
           <%= image_tag message.attached_img.url(:medium), :width => "100%" %>
@@ -23,7 +33,6 @@
         <div class="col-xs-4" style="text-align:center;">
           <a href="<%= user_path(user)%>" align="center">
             <em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>">
-              <%= user.user_name %>
             </em>
           </a>
         </div>

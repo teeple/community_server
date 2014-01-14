@@ -23,15 +23,22 @@ class Message < ActiveRecord::Base
     Message.all.where(:user_id => user.users.pluck(:id)).order("created_at desc").page(page_num)
   end
 
+  def self.check_unread_and_make_it_read(message,user)
+    unread_message = Message.find(message.id).message_flags.where(:user_to=>user.id)
+    is_unread = unread_message.count > 0 ? true : false;
+    unread_message.destroy_all
+    is_unread
+  end
+
   def make_message_as_unread_and_send_noti
     
     sms_message = self.user.user_name + ' 님이 새 글을 등록하셨습니다. ' + ENV['COM_SERVER_URL'] + '/users/' + self.user.id.to_s + '?tab=message'
 
     event = Event.create!(:event_type => 'post')
-            
-    User.my_followers(self.user).each do |relation|
-      MessageFlag.create(:message_id => self.id, :user_from => self.user.id, :user_to => relation.user_from)
 
+    User.my_followers(self.user).each do |relation|
+      MessageFlag.create!(:message_id => self.id, :user_from => self.user.id, :user_to => relation.user_from)
+      
       if relation.event_post
         # same zone check
         follower = User.find(relation.user_from)
@@ -61,7 +68,9 @@ class Message < ActiveRecord::Base
     case self.user.user_type
       when true # user_type => cafe
         # expired_at이 설정되어 있으면, 그 값을 사용하고, 그렇지 않으면 Profile의 expire day, hour를 가져와서 이를 활용
-        self.expired_at = Time.now + self.user.expire_day.day + self.user.expire_hour.hour unless self.expired_at
+        expire_day = self.user.expire_day ? self.user.expire_day.day : ENV['EXPIRE_DAY'].to_i.day
+        expire_hour = self.user.expire_hour ? self.user.expire_hour.hour : ENV['EXPIRE_HOUR'].to_i.hour
+        self.expired_at = Time.now + expire_day + expire_hour unless self.expired_at
       when false # user_type => general
         self.expired_at = Time.now + ENV['EXPIRE_DAY'].to_i.day + ENV['EXPIRE_HOUR'].to_i.hour
     end
