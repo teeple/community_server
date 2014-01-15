@@ -15,7 +15,7 @@ ComDev::Application.routes.draw do
 
   get 'search', to:'search#search'
 
-  resources :apis,     only: [:new, :create, :destroy, :show]
+  resources :apis     
 
   resources :message_flags
 
