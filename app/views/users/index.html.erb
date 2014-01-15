@@ -12,10 +12,17 @@
     <div class="row">
       <div class="col-xs-4">
         <a href="<%= user_path(user)%>">
-          <%= image_tag user.avatar.url(:medium) %>
+          <%= image_tag user.avatar.url(:medium),  :width => "100px",:height => "100px" %>
         </a>
       </div>
-      <div class="col-xs-7 well" style="vertical-align:middle;"><p >안녕하세요~ 저는 누구누구입니다. 어디어디 살구요. 무엇무엇 좋아해요 반가워요~</p></div>
+      <div class="col-xs-7 well" style="vertical-align:middle;">
+        <%= user.user_name %>
+        <% if user.user_type %>
+          &nbsp;<span class="badge">Cafe</span>
+        <% end %>
+        <br/>
+        <p ><%= user.description %></p>
+      </div>
     </div>
     <div class="row">
         <div class="col-xs-4" style="text-align:center;">
@@ -24,6 +31,7 @@
               <%= user.user_name %>
             </em>
           </a>
+
         </div>
         <div class="col-xs-8">Follower <span class="badge"><%= User.my_followers_count(user) %></span></div>
     </div>

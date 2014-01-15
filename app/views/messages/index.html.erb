@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-xs-4">
         <a href="<%= user_path(user)%>">
-          <%= image_tag user.avatar.url(:medium) %>
+          <%= image_tag user.avatar.url(:medium), :width => "100px",:height => "100px" %>
         </a>
       </div>
       <div class="col-xs-7 well" style="vertical-align:middle;">
@@ -25,7 +25,7 @@
         <%= message.created_at %>
         <p><%=message.message%></p>
         <%if message.attached_img_file_name %>
-          <%= image_tag message.attached_img.url(:medium), :width => "100%" %>
+          <%= image_tag message.attached_img.url(:original), :width => "100%" %>
         <%end%>
       </div>
     </div>

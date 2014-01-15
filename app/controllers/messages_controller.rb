@@ -1,12 +1,12 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  #before_action :signed_in_user
+  before_action :signed_in_user
   
   # GET /messages
   # GET /messages.json
   def index
     #temp current user
-    @current_user = User.first
+    # @current_user = User.first
 
     page_num = params[:page]? params[:page] : 1
 
@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     #temp current user
-    @current_user = User.first
+    # @current_user = User.first
     @message = Message.new
   end
 
@@ -34,7 +34,7 @@ class MessagesController < ApplicationController
   def create
     #temp current user
     #@current_user = User.find(23)
-    @current_user = User.first
+    # @current_user = User.last
     
     @message = @current_user.messages.build(message_params)
     

@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :messages, class_name: 'Message', foreign_key: :user_id, dependent: :destroy
   has_many :message_flags,  class_name: 'MessageFlag', foreign_key: :user_from, dependent: :destroy
   has_many :relations, class_name: 'Relation', foreign_key: :user_from, dependent: :destroy
-  has_many :users, through: :relations
+  has_many :followee, through: :relations
   has_many :sms_notifications, class_name: 'SmsNotification', foreign_key: :receiver_user_id
   
   scope :users_general, -> {where(user_type: false).order("user_name asc")}
@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
   scope :users_general_without, -> (id) {where(user_type: false).where.not(id: id)}
   scope :users_cafe_without, -> (id) {where(user_type: true).where.not(id: id)}
 
-  scope :users_with_relationship, -> (user) {where(id: user.users.pluck(:id))}
+  scope :users_with_relationship, -> (user) {where(id: user.followee.pluck(:id))}
 
   validates :phone_no, 
             :uniqueness => true,
@@ -37,7 +37,7 @@ class User < ActiveRecord::Base
   end
 
   def self.followers(user, page_num)
-    user.users.order("user_name asc").page(page_num)
+    user.followee.order("user_name asc").page(page_num)
   end
 
   def self.relation_follows_me_with_entry(user)
@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 
   def validate_imsi_ecgi
     if remote_ip and valid?(:user_name) and valid?(:phone_no)
-      # call API server with ip_address
+      call API server with ip_address
       response = Apis.get_imsi_ecgi(remote_ip)
       if response.code == 200
         xml_parser = Nori.new

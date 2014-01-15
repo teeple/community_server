@@ -29,25 +29,46 @@ class EventsController < ApplicationController
     imsi = result['BODY']['IMSI']
     in_or_out = result['BODY']['EVENT']
 
+    EVENT_TYPE = Hash.new
+    EVENT_TYPE[:IN] = 'entry'
+    EVENT_TYPE[:OUT] = 'exit'
+
+    event_type = EVENT_TYPE[in_or_out.to_sym]
+
+    event = Event.create!(:event_type => event_type)
+
     # get user with imsi
     user = User.find_by_imsi(imsi)
 
-    case in_or_out
-     when 'IN'
+    case event_type
+     when 'entry'
        # find relation
-       event_type = 'entry'
        relations = User.relation_follows_me_with_entry(user)
        sms_message = user.user_name + ' 님이 ' + ENV['COM_SERVER_NAME'] + '에 진입하셨습니다.'
-     when 'OUT'
-       event_type = 'exit'
+
+       # 진입한 사용자가 following하는 사람들의 새글이 존재할 때, 그 그들을 전송한다.
+       message_flags = MessageFlag.where(:user_to => user.id).distinct(:user_from)
+       message_flags.each do |message_flag|
+        message_count = MessageFlag.where(:user_to => user.id, :user_from => message_flag.user_from)
+        sms_message = message_flag.followee.user_name + "님의 새 글이 몇 " + message_count + " 건 있습니다."
+                        + ENV['COM_SERVER_URL'] + '/users/' + message_flag.followee.id.to_s + '?tab=message'
+                        
+        SmsNotification.create!(
+          :receiver_user_id => user.id, 
+          :sms_message => sms_message, 
+          :receiver_phone_no => user.phone_no, 
+          :event_type => event_type
+          :event_id => event.id,
+          :status => 'NEW')
+       end
+
+     when 'exit'
        relations = User.relation_follows_me_with_exit(user)
        sms_message = user.user_name + ' 님이 ' + ENV['COM_SERVER_NAME'] + '에서 이탈하셨습니다.'
      else 
-       render status: 500
+      event.destroy
+      render status: 500
     end
-
-    # crete event instance
-    event = Event.create!(:event_type => event_type)
 
     relations.each do | relation |
       SmsNotification.create!(
@@ -58,6 +79,7 @@ class EventsController < ApplicationController
               :event_id => event.id,
               :status => 'NEW')
     end
+
 
     render nothing: true
   end

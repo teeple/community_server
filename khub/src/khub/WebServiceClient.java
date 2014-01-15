@@ -28,6 +28,8 @@ public class WebServiceClient
 
       while(true){
           try{
+            System.out.println("....\n");
+
             //make connection
             if(con == null) con = DriverManager.getConnection("jdbc:mysql://222.235.208.216/com_dev","root", "root.123");
             

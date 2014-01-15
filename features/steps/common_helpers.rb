@@ -84,4 +84,10 @@ module CommonHelpers
     api = Api.create!(:imsi => imsi, :ecgi => ecgi)
   end
 
+  def create_related_user_with_name_and_description(user_name,user_from,user_type,postfix,following,description)
+    user = User.create!(:user_name => user_name, :phone_no => '010111122' + postfix, :imsi => '11' + postfix, :ecgi => '11' + postfix, :user_type => user_type, :description => description)
+    Relation.create!(:user_from => user_from, :user_to => user.id) if following
+    user
+  end
+
 end

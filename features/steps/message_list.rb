@@ -20,7 +20,6 @@ class Spinach::Features::MessageList < Spinach::FeatureSteps
       follower = create_related_user @user.id, true, "#{i}", true
       @messages << (follower.messages.create(:message => follower.id.to_s + "_message_" + i.to_s)).message
     end
-
   end
 
   step '메시지 페이지 접속' do

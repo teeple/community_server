@@ -20,7 +20,7 @@ class Message < ActiveRecord::Base
   end
 
   def self.friends_messages(user,page_num)
-    Message.all.where(:user_id => user.users.pluck(:id)).order("created_at desc").page(page_num)
+    Message.all.where(:user_id => user.followee.pluck(:id)).order("created_at desc").page(page_num)
   end
 
   def self.check_unread_and_make_it_read(message,user)
