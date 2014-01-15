@@ -8,8 +8,12 @@ class Spinach::Features::EventEntryExit < Spinach::FeatureSteps
 
   step 'Follower가 여러명 있다' do
     # 나를 following하는 사용자 (일반 사용자) 생성
-    for i in 11..15
-      create_my_follower @user, false, "#{i}", @user.ecgi, true, true, true
+    @my_followers_with_noti = Array.new
+    for i in 11..12
+      @my_followers_with_noti.push(create_my_follower @user, false, "#{i}", @user.ecgi, true, true, true) #post,entry,exit
+    end 
+    for i in 13..15
+      create_my_follower @user, false, "#{i}", @user.ecgi, false, false, false
     end 
   end
 
@@ -28,14 +32,20 @@ class Spinach::Features::EventEntryExit < Spinach::FeatureSteps
 
 
   step 'Followee들에게 진입알림 메시지가 전송된다' do
-    pending 'step not implemented'
+    SmsNotification.all.count.should == @my_followers_with_noti.count
   end
 
   step 'Followee가 존에서 이탈' do
-    pending 'step not implemented'
+    xml = '<?xml version="1.0" encoding="UTF-8"?><BODY><IMSI>'+@user.imsi+'</IMSI><EVENT>OUT</EVENT></BODY>'
+   
+    url = URI.parse('http://localhost:3000/events')
+    request = Net::HTTP::Post.new(url.path)
+    request.content_type = 'application/xml'
+    request.body = xml
+    response = Net::HTTP.start(url.host, url.port) {|http| http.request(request)}
   end
 
   step 'Followee들에게 이탈알림 메시지가 전송된다' do
-    pending 'step not implemented'
+    SmsNotification.all.count.should == @my_followers_with_noti.count
   end
 end

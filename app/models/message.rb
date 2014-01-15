@@ -44,7 +44,7 @@ class Message < ActiveRecord::Base
 
     event = Event.create!(:event_type => 'post')
 
-    User.my_followers(self.user).each do |relation|
+    User.relation_follows_me(self.user).each do |relation|
       MessageFlag.create!(:message_id => self.id, :user_from => self.user.id, :user_to => relation.user_from)
       
       if relation.event_post

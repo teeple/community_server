@@ -40,7 +40,15 @@ class User < ActiveRecord::Base
     user.users.order("user_name asc").page(page_num)
   end
 
-  def self.my_followers(user)
+  def self.relation_follows_me_with_entry(user)
+    Relation.where(:user_to => user.id,:event_entry => true)
+  end
+
+  def self.relation_follows_me_with_exit(user)
+    Relation.where(:user_to => user.id,:event_exit => true)
+  end
+
+  def self.relation_follows_me(user)
     Relation.where(:user_to => user.id)
   end
 

@@ -24,29 +24,42 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-   xml_parser = Nori.new
-   result = xml_parser.parse(request.body.read)
-   imsi = result['BODY']['IMSI']
-   event_type = result['BODY']['EVENT']
+    xml_parser = Nori.new
+    result = xml_parser.parse(request.body.read)
+    imsi = result['BODY']['IMSI']
+    in_or_out = result['BODY']['EVENT']
 
-   # create event instance
-   case event_type
-    when 'IN'
-      @event = Event.create!(:event_type => 'entry')
-    when 'OUT'
-      @event = Event.create!(:event_type => 'exit')
-    else 
-      render status: 500
-   end
+    # get user with imsi
+    user = User.find_by_imsi(imsi)
 
-   # get user with imsi
-   user = User.find_by_imsi(imsi)
+    case in_or_out
+     when 'IN'
+       # find relation
+       event_type = 'entry'
+       relations = User.relation_follows_me_with_entry(user)
+       sms_message = user.user_name + ' 님이 ' + ENV['COM_SERVER_NAME'] + '에 진입하셨습니다.'
+     when 'OUT'
+       event_type = 'exit'
+       relations = User.relation_follows_me_with_exit(user)
+       sms_message = user.user_name + ' 님이 ' + ENV['COM_SERVER_NAME'] + '에서 이탈하셨습니다.'
+     else 
+       render status: 500
+    end
 
-   # find followers
-   followers = user.my_followers
-   
+    # crete event instance
+    event = Event.create!(:event_type => event_type)
 
-   render nothing: true
+    relations.each do | relation |
+      SmsNotification.create!(
+              :receiver_user_id => relation.follower.id, 
+              :sms_message => sms_message, 
+              :receiver_phone_no => relation.follower.phone_no, 
+              :event_type => event.event_type, 
+              :event_id => event.id,
+              :status => 'NEW')
+    end
+
+    render nothing: true
   end
 
   # PATCH/PUT /events/1
