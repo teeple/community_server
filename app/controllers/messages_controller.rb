@@ -6,7 +6,7 @@ class MessagesController < ApplicationController
   # GET /messages.json
   def index
     #temp current user
-    # @current_user = User.first
+    #@current_user = User.first
 
     page_num = params[:page]? params[:page] : 1
 

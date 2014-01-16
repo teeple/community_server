@@ -10,40 +10,35 @@
 <div class="container" id="content_users">
   <% @users.each do |user| %>
     <div class="row">
-      <div class="col-xs-4">
+      <div class="col-xs-3">
         <a href="<%= user_path(user)%>">
-          <%= image_tag user.avatar.url(:medium),  :width => "100px",:height => "100px" %>
+          <%= image_tag user.avatar.url(:medium), :width => "100%",:height => "100%", :class => "round_border" %>
         </a>
       </div>
-      <div class="col-xs-7 well" style="vertical-align:middle;">
-        <%= user.user_name %>
+      <div class="col-xs-9" style="vertical-align:middle;">
+        <span class="user_name">
+          <%= user.user_name %>
+        </span>        
         <% if user.user_type %>
-          &nbsp;<span class="badge">Cafe</span>
+          <span class="cafe badge">
+            Cafe
+          </span>
         <% end %>
-        <br/>
-        <p ><%= user.description %></p>
-      </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-4" style="text-align:center;">
-          <a href="<%= user_path(user)%>" align="center">
-            <em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>">
-              <%= user.user_name %>
-            </em>
-          </a>
-
+        <br/><br/>
+        <div class="user_description" >
+          <%= user.description %>        
         </div>
-        <div class="col-xs-8">Follower <span class="badge"><%= User.my_followers_count(user) %></span></div>
+      </div>
     </div>
     <div class="row"><div class="col-xs-12"><hr></div></div>
   <% end %>
   <br/>
   <!-- paging -->
+  <br/>
   <div class="row">
-    <div class="col-xs-12">
-      <%= paginate @users ,:window => 1%>
-      <br/>
-    </div>
+  <div class="col-xs-12 text-center">
+    <%= paginate @users ,:window => 1%>
+    <br/>
   </div>
 </div>
   

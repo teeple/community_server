@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     #temp current user
-    # @current_user = User.first
+     # @current_user = User.first
 
     @tab_class = Hash.new
     @tab_class = {:followers => 'btn-deactive', 
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     #temp current user
-    # @current_user = User.last
+     # @current_user = User.last
 
     @tab_class = Hash.new
     @tab_class = {
