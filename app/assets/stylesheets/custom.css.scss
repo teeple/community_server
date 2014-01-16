@@ -1,23 +1,22 @@
-$nav-padding:50px;
+/* nav bar 위치 수정 */
+.navbar-collapse{
+	float:right;	
+	text-align:right;
+}
 
+/* nav bar 때문에 그 공간만큼 Body 패딩 */
+$nav-padding:50px;
 .nav-padding{
 	height:$nav-padding;
 }
 
-.border-right{
-	border-right: 1px solid;
-}
-
-
-.border-left{
-	border-left: 1px solid;
-}
-
+/* glyphicon default 색상 및 배경색 설정 */
 .glyphicon{
 	color:blue;
 	background-color:transparent;
 }
 
+/* datetime picker 관련 */
 .timepicker-picker > a{
 	background-color:transparent;
 }
@@ -36,7 +35,24 @@ a:hover, a:focus{
 	border-color: #357ebd;
 }
 
-.sign_up_form{
-	background-image: url("/images/singup_bg01.png");
-	background-position: top center;
+/* full width 차지하는 Button들 border */
+.btn-group-justified{
+	a{
+		border-radius:0px;
+	}
+}
+
+/* hr */
+hr{
+	border-top: 1px solid #e3e3e3;
+}
+
+/* pager */
+.pagination > span{
+	color:#999999;
+	font-size:26px;
+}
+.pagination > span.current{
+	color:#2a8be9;
+	font-size:26px;
 }

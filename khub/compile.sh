@@ -11,4 +11,5 @@ export CLASSPATH=$CLASSPATH:./lib/wsclient.jar
 export CLASSPATH=$CLASSPATH:./lib/xmlparserv2.jar
 export CLASSPATH=$CLASSPATH:./lib/xsdlib.jar
 export CLASSPATH=$CLASSPATH:./lib/mysql-connector-java-5.1.28-bin.jar
-javac -classpath $CLASSPATH src/khub/*.java
+#javac -classpath $CLASSPATH src/khub/*.java -Xlint:unchecked 
+javac -classpath $CLASSPATH src/khub/*.java 

@@ -1,6 +1,6 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  # before_action :signed_in_user
+  before_action :signed_in_user
   
   # GET /messages
   # GET /messages.json
@@ -21,7 +21,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     #temp current user
-    @current_user = User.first
+    # @current_user = User.first
     
     @message = Message.new
   end

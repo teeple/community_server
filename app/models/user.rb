@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   validate :validate_imsi_ecgi, on: :create
 
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/non_profile.png"
 
   def self.search(keyword,page_num)
     User.where('description like ? or user_name like ?','%'+keyword+'%','%'+keyword+'%').order("user_name asc").page(page_num)

@@ -1,3 +1,32 @@
 // Place all the styles related to the messages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.btn.btn-write{
+	background-color: #3c89d4;
+	color: #ffffff;
+	font-size:30px;
+}
+
+.badge.cafe{
+	background-color:#e1697d;
+}
+.badge.new{
+	background-color:#ffa200;
+}
+
+.user_name{
+	color:#2a8be9;
+	font-size:16px;	
+}
+.message_time{
+	color:#888888;
+}
+.message_message{
+	color:#222222;
+	font-size:16px;
+}
+
+img.round_border{
+	border-radius:10px;
+}

@@ -1,3 +1,17 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* User 에서 Follower 수랑 Follow버튼 사이 세로 줄 */
+.border-right{
+	border-right: 1px solid;
+}
+.border-left{
+	border-left: 1px solid;
+}
+
+/* 회원가입 화면 */
+.sign_up_form{
+	background-image: url("/images/singup_bg01.png");
+	background-position: top center;
+}

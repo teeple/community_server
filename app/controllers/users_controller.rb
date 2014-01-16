@@ -29,11 +29,9 @@ class UsersController < ApplicationController
   end
 
   def setting
-    @user = @current_user
+    # @user = @current_user
     #temp current user
-    #@user = @current_user
-    # @user  = params[:user]? User.find(params[:user]) : User.first
-    # @users = User.all
+    @user = User.last
   end
 
   # GET /users/1

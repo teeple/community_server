@@ -19,10 +19,19 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 en:
+  date:
+    formats:
+      default: "%d/%m/%Y"
+  time:
+    formats:
+      default: "%d/%m/%Y %H:%M"
+  datetime:
+    formats:
+      default: "%d/%m/%Y %H:%M"
   views:
     pagination:
-      first: "<<"
-      last: ">>"
+      first: ""
+      last: ""
       previous: "<"
       next: ">"
       truncate: ".."
