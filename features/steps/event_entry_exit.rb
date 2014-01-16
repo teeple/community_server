@@ -2,7 +2,6 @@ class Spinach::Features::EventEntryExit < Spinach::FeatureSteps
   include CommonHelpers
   
   step 'Followee가 있다' do
-    clear_all_database
     @user = get_test_user
   end
 

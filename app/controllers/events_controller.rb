@@ -29,11 +29,11 @@ class EventsController < ApplicationController
     imsi = result['BODY']['IMSI']
     in_or_out = result['BODY']['EVENT']
 
-    EVENT_TYPE = Hash.new
-    EVENT_TYPE[:IN] = 'entry'
-    EVENT_TYPE[:OUT] = 'exit'
+    hash_event_type = Hash.new
+    hash_event_type[:IN] = 'entry'
+    hash_event_type[:OUT] = 'exit'
 
-    event_type = EVENT_TYPE[in_or_out.to_sym]
+    event_type = hash_event_type[in_or_out.to_sym]
 
     event = Event.create!(:event_type => event_type)
 
@@ -47,17 +47,29 @@ class EventsController < ApplicationController
        sms_message = user.user_name + ' 님이 ' + ENV['COM_SERVER_NAME'] + '에 진입하셨습니다.'
 
        # 진입한 사용자가 following하는 사람들의 새글이 존재할 때, 그 그들을 전송한다.
-       message_flags = MessageFlag.where(:user_to => user.id).distinct(:user_from)
+       message_flags = MessageFlag.where(:user_to => user.id).includes(:followee)
+
+       followee_hash = Hash.new
+
        message_flags.each do |message_flag|
-        message_count = MessageFlag.where(:user_to => user.id, :user_from => message_flag.user_from)
-        sms_message = message_flag.followee.user_name + "님의 새 글이 몇 " + message_count + " 건 있습니다."
-                        + ENV['COM_SERVER_URL'] + '/users/' + message_flag.followee.id.to_s + '?tab=message'
-                        
+        
+        if followee_hash[message_flag.user_from.to_s.to_sym] 
+          next 
+        end
+        followee_hash[message_flag.user_from.to_s.to_sym] = true
+          
+        message_count = MessageFlag.where(:user_to => user.id, :user_from => message_flag.user_from).count
+       
+       
+        sms_message1 = message_flag.followee.user_name + "님의 새 글이 몇 " + message_count.to_s + " 건 있습니다. " 
+        sms_message2 = ENV['COM_SERVER_URL'] + '/users/' +  message_flag.followee.id.to_s + '?tab=message'
+        sms_message = sms_message1 + sms_message2
+
         SmsNotification.create!(
           :receiver_user_id => user.id, 
           :sms_message => sms_message, 
           :receiver_phone_no => user.phone_no, 
-          :event_type => event_type
+          :event_type => event.event_type,
           :event_id => event.id,
           :status => 'NEW')
        end

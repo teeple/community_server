@@ -76,13 +76,13 @@ class Message < ActiveRecord::Base
     case self.user.user_type
       when true # user_type => cafe
         # expired_at이 설정되어 있으면, 그 값을 사용하고, 그렇지 않으면 Profile의 expire day, hour를 가져와서 이를 활용
-        # expire_day = self.user.expire_day ? self.user.expire_day.day : ENV['EXPIRE_DAY'].to_i.day
-        # expire_hour = self.user.expire_hour ? self.user.expire_hour.hour : ENV['EXPIRE_HOUR'].to_i.hour
-        # self.expired_at = Time.now + expire_day + expire_hour unless self.expired_at
-        self.expired_at = 2.minutes.from_now
+        expire_day = self.user.expire_day ? self.user.expire_day.day : ENV['EXPIRE_DAY'].to_i.day
+        expire_hour = self.user.expire_hour ? self.user.expire_hour.hour : ENV['EXPIRE_HOUR'].to_i.hour
+        self.expired_at = Time.now + expire_day + expire_hour unless self.expired_at
+        # self.expired_at = 2.minutes.from_now
       when false # user_type => general
-        # self.expired_at = Time.now + ENV['EXPIRE_DAY'].to_i.day + ENV['EXPIRE_HOUR'].to_i.hour
-        self.expired_at = 1.minutes.from_now
+        self.expired_at = Time.now + ENV['EXPIRE_DAY'].to_i.day + ENV['EXPIRE_HOUR'].to_i.hour
+        # self.expired_at = 1.minutes.from_now
     end
   end
 end
