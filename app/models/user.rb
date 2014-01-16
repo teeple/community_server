@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attr_accessor :remote_ip
   paginates_per 5
 
-  has_many :messages, class_name: 'Message', foreign_key: :user_id, dependent: :destroy
+  has_many :messages, class_name: 'Message', foreign_key: :user_id, dependent: :destroy, :order => 'created_at desc'
   has_many :message_flags,  class_name: 'MessageFlag', foreign_key: :user_from, dependent: :destroy
   has_many :relations, class_name: 'Relation', foreign_key: :user_from, dependent: :destroy
   has_many :followee, through: :relations
@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 
   def validate_imsi_ecgi
     if remote_ip and valid?(:user_name) and valid?(:phone_no)
-      call API server with ip_address
+      # call API server with ip_address
       response = Apis.get_imsi_ecgi(remote_ip)
       if response.code == 200
         xml_parser = Nori.new

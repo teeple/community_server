@@ -9,12 +9,12 @@ class UsersController < ApplicationController
     # @current_user = User.first
 
     @tab_class = Hash.new
-    @tab_class = {:followers => 'btn-default', 
-      :not_followers => 'btn-default', 
-      :cafes => 'btn-default', 
+    @tab_class = {:followers => 'btn-deactive', 
+      :not_followers => 'btn-deactive', 
+      :cafes => 'btn-deactive', 
     }
     @tab = params[:tab]? params[:tab] : 'followers'
-    @tab_class[@tab.to_sym] = 'btn-primary'
+    @tab_class[@tab.to_sym] = 'btn-active'
 
     page_num = params[:page]? params[:page] : 1
 
@@ -31,22 +31,22 @@ class UsersController < ApplicationController
   def setting
     # @user = @current_user
     #temp current user
-    @user = User.last
+    @user = User.first
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     #temp current user
-    # @current_user = User.first
+    # @current_user = User.last
 
     @tab_class = Hash.new
     @tab_class = {
-      :profile => 'btn-default', 
-      :message => 'btn-default', 
+      :profile => 'btn-deactive', 
+      :message => 'btn-deactive', 
     }
     @tab = params[:tab]? params[:tab] : 'profile'
-    @tab_class[@tab.to_sym] = 'btn-primary'
+    @tab_class[@tab.to_sym] = 'btn-active'
 
     respond_to do |format|
 

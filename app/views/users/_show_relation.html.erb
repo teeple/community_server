@@ -3,7 +3,11 @@
   event = {:entry => false, :exit => false, :post => false, :disabled => true }
 
   event_label = Hash.new 
-  event_label = {:entry => 'unchecked', :exit => 'unchecked', :post => 'unchecked'}
+
+  event_label_checked = '/images/icon_check_active.png'
+  event_label_unchecked = '/images/icon_check.png'
+
+  event_label = {:entry => event_label_unchecked, :exit => event_label_unchecked, :post => event_label_unchecked}
   
   if rel.count > 0
     event[:entry] = true if rel[0].event_entry
@@ -11,33 +15,36 @@
     event[:post] = true if rel[0].event_post
     event[:disabled] = false
 
-    event_label[:entry] = 'checked' if rel[0].event_entry
-    event_label[:exit] = 'checked' if rel[0].event_exit
-    event_label[:post] = 'checked' if rel[0].event_post
+    event_label[:entry] = event_label_checked if rel[0].event_entry
+    event_label[:exit] = event_label_checked if rel[0].event_exit
+    event_label[:post] = event_label_checked if rel[0].event_post
   end
 %>
 
 <div id="show_relation">
-  <%if @tab_class[:profile] == "btn-primary" %>
+  <%if @tab_class[:profile] == "btn-active" %>
     <div class="container">
-      <div class="row">
-        <div class="col-xs-1"></div>
-        <div class="col-xs-10"><%=@user.description%></div>
-        <div class="col-xs-1"></div>
-      </div>
+      <% if @user.description %>
+        <div class="row">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-10"><%=@user.description%></div>
+          <div class="col-xs-1"></div>
+        </div>
+        <br/>
+      <% end %>
       <div class="row-fluid">
         <div class="col-xs-6 text-center border-right">
-          <div><h1><%=User.my_followers_count(@user)%></h1></div>
-          Followers
+          <div class="follower_count"><%=User.my_followers_count(@user)%></div>
+          <div class="gray_color">Followers</div>
         </div>
         <div class="col-xs-6 text-center">
           <div>
             <% if rel.count > 0 %>
-              <%= link_to image_tag('/images/follow.png') , user_path(@user,:trigger_element => 'following'), remote: true%>
-              <div>Unfollow</div>
+              <%= link_to image_tag('/images/icon_unfollow.png') , user_path(@user,:trigger_element => 'following'), remote: true ,:class => 'no_hover'%>
+              <div class="gray_color">Unfollow</div>
             <% else %>
-              <%= link_to image_tag('/images/unfollow.png') , user_path(@user,:trigger_element => 'following'), remote: true%>
-              <div>Follow</div>
+              <%= link_to image_tag('/images/icon_follow.png') , user_path(@user,:trigger_element => 'following'), remote: true,:class => 'no_hover'%>
+              <div class="gray_color">Follow</div>
             <% end %>
           </div>
         </div>
@@ -45,15 +52,16 @@
     </div>
 
     </br>
+    </br>
     
     <div class="btn-group btn-group-justified">
-          <%= link_to "진입알림 "+event_label[:entry] , user_path(@user,:trigger_element => 'event_entry', :tab => 'profile'), :id => 'event_entry', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+        <%= link_to "진입알림 #{image_tag(event_label[:entry])}".html_safe, user_path(@user,:trigger_element => 'event_entry', :tab => 'profile'), :id => 'event_entry', remote: true, :class => 'btn btn-event no_hover', :role=>'button', :disabled => event[:disabled] %>
     </div>
     <div class="btn-group btn-group-justified">
-          <%= link_to "진입알림 "+event_label[:exit] , user_path(@user,:trigger_element => 'event_exit', :tab => 'profile'), :id => 'event_exit', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+        <%= link_to "이탈알림 #{image_tag(event_label[:exit])}".html_safe , user_path(@user,:trigger_element => 'event_exit', :tab => 'profile'), :id => 'event_exit', remote: true, :class => 'btn btn-event no_hover', :role=>'button', :disabled => event[:disabled]%>
     </div>
     <div class="btn-group btn-group-justified">
-          <%= link_to "새글알림 "+event_label[:post] , user_path(@user,:trigger_element => 'event_post', :tab => 'profile'), :id => 'event_post', remote: true, :class => 'btn btn-default', :role=>'button', :disabled => event[:disabled]%>
+        <%= link_to "새글알림 #{image_tag(event_label[:post])}".html_safe , user_path(@user,:trigger_element => 'event_post', :tab => 'profile'), :id => 'event_post', remote: true, :class => 'btn btn-event no_hover', :role=>'button', :disabled => event[:disabled]%>
     </div>
   <%else %>
   <%end %>

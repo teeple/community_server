@@ -25,12 +25,12 @@ public class WebServiceClient
 
       Connection con = null;
 
-      // while(true){
+      while(true){
           try{
             System.out.println("....\n");
 
             client.sendSms("01087259388", "testtest");
-            
+            break;
 
             // //make connection
             // if(con == null) con = DriverManager.getConnection("jdbc:mysql://222.235.208.216/com_dev","root", "root.123");
@@ -67,54 +67,64 @@ public class WebServiceClient
           // } catch (java.lang.InterruptedException e){
           //   System.out.println(e);
             } catch(Exception e) {
-          //   System.out.println(e);
+              // System.out.printlin(e);
             }
-      // }     
+      }     
     }
 
     private HashMap<String, String> sendSms(String phone_no, String sms_message){
       HashMap<String, String> result = new HashMap<String, String>();
 
-      System.out.println("******* START *******");
-
-      // 서비스에 필요한 파라미터를 저장할 WsParamSet 생성
+      /*-------------------------------------------------------------------------*/
       WsParamSet wps = new WsParamSet();
-      // 필요한 파라미터 개수 크기의 WsParam 배열 생성
+
       WsParam[] params = new WsParam[7];
-      // 파라미터 하나하나에 맵핑되는 WsParam을 생성하여 파라미터 이름과 값 셋팅
-      params[0] = new WsParam();
-      // params[0].setName("CALL_CTN");
-      // params[0].setValue("0162221001");
+
       params[0] = new WsParam();                // SMS요청타입  
       params[0].setName("MSG_TYPE");
       params[0].setValue("S001");
-      params[1] = new WsParam();                // 회신전화번호  
-      params[1].setName("CALLBACK_CTN");
-      params[1].setValue("01074788303");
+      // params[1] = new WsParam();                // 회신전화번호  
+      // params[1].setName("CALLBACK_CTN");
+      // params[1].setValue("0162030061");
       // params[2] = new WsParam();                // 콜백 URL 주소  
       // params[2].setName("CALLBACK_URL");
       // params[2].setValue("http://www.show.co.kr");
-      params[2] = new WsParam();                // 전송 메시지 
-      params[2].setName("MSG_CONTENT");
-      params[2].setValue("KHUB TB테스트");
-      params[3] = new WsParam();                // 플랫폼별 구분 
-      params[3].setName("PFORM_TYPE");
-      params[3].setValue("1");
-      params[4] = new WsParam();                // 유무선 구분 
-      params[4].setName("SERVICE_TYPE");
-      params[4].setValue("A");
-      params[5] = new WsParam();                // 발신자 폰번호 
-      params[5].setName("CALL_CTN");
-      params[5].setValue("01074788303");
-      params[6] = new WsParam();                // 수신자 폰번호 
-      params[6].setName("RCV_CTN");
-      params[6].setValue("01074788303");
-      // params[8] = new WsParam();                // 과금URL  
+      params[1] = new WsParam();                // 전송 메시지 
+      params[1].setName("MSG_CONTENT");
+      params[1].setValue("KHUB TB테스트");
+      params[2] = new WsParam();                // 플랫폼별 구분 
+      params[2].setName("PFORM_TYPE");
+      params[2].setValue("1");
+      params[3] = new WsParam();                // 유무선 구분 
+      params[3].setName("SERVICE_TYPE");
+      params[3].setValue("A");
+      params[4] = new WsParam();                // 발신자 폰번호 
+      params[4].setName("CALL_CTN");
+      params[4].setValue("01062230149");
+      params[5] = new WsParam();                // 수신자 폰번호 
+      params[5].setName("RCV_CTN");
+      params[5].setValue("01062230149");
+      // params[8] = new WsParam();           f     // 과금URL 
       // params[8].setName("BILL_URL");
       // params[8].setValue("http://www.show.co.kr/sms50");
-      // params[9] = new WsParam();                // 리포트 수신받을 CP측 서버정보  
+      // params[9] = new WsParam();                // 리포트 수신받을 CP측 서버정보 
       // params[9].setName("REPORT_URL");
       // params[9].setValue("http://111.111.111.111/report.asp");
+      // params[10] = new WsParam();               // 수신자의 번호이동정보 
+      // params[10].setName("RECEIVE_PHONE_RD");
+      // params[10].setValue("");
+      params[6].setName("PREPAID");
+      params[6].setValue("0");
+      // params[12] = new WsParam();               // 지연 전송 시간(예약전송시 참조)을 위한 필드 
+      // params[12].setName("DEFER_T");
+      // params[12].setValue("");
+      // params[13] = new WsParam();               // 전송되는 Text 의 형식 (0~4) 
+      // params[13].setName("ALPHA_IND");
+      // params[13].setValue("");
+      // params[14] = new WsParam();               // 전송헤더 
+      // params[14].setName("UDHI");
+      // params[14].setValue("");
+      /*-------------------------------------------------------------------------*/
 
       wps.setParam(params);
       // BizTemplate 인증키 셋팅
@@ -132,14 +142,11 @@ public class WebServiceClient
 
       IWebServiceEndpoint iwse = null;
         try {
-                      System.out.println("******* START2 *******");
-
             // IWebServiceEndpoint 객체를 생성하여 ServiceURL를 셋팅한다
             iwse = new IWebServiceEndpoint();
             iwse.setEndpoint(serviceURL);
 
-
-
+            System.out.println(wps);
             // KHUB API를 호출한다.
             WsParamSet paramSet = iwse.invoke_API(templateID, authKey, wps);
             // 리턴받은 결과를 출력한다.

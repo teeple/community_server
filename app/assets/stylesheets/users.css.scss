@@ -15,3 +15,24 @@
 	background-image: url("/images/singup_bg01.png");
 	background-position: top center;
 }
+
+/* User show */
+.profile_background{
+	background-color:#2f2f2f;
+}
+
+.thumbnail{
+	border-radius:10px;
+}
+
+.follower_count{
+	font-size:40px;
+	color:#2a8be9;
+	height:40px;
+}
+
+.btn-event{
+	@extend .btn-tab-default;
+	background-color:#f5f5f5;
+	color:#666;
+}

@@ -1,15 +1,15 @@
 class SearchController < ApplicationController
     before_action :signed_in_user
     
-	def search
-		@keyword = params[:keyword]? params[:keyword] : ''
+  def search
+	@keyword = params[:keyword]? params[:keyword] : ''
 
     @tab_class = Hash.new
-    @tab_class = {:users => 'btn-default',:messages => 'btn-default'}
+    @tab_class = {:users => 'btn-deactive',:messages => 'btn-deactive'}
      
     @tab = params[:tab]? params[:tab] : 'users'
     
-    @tab_class[@tab.to_sym] = 'btn-primary'
+    @tab_class[@tab.to_sym] = 'btn-active'
 
     @users = nil
     @messages = nil
