@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :signed_in_user, except: [:new, :create]
+  # before_action :signed_in_user, except: [:new, :create]
 
   # GET /users
   # GET /users.json
   def index
     #temp current user
-     # @current_user = User.first
+      @current_user = User.first
 
     @tab_class = Hash.new
     @tab_class = {:followers => 'btn-deactive', 
@@ -31,14 +31,14 @@ class UsersController < ApplicationController
   def setting
     # @user = @current_user
     #temp current user
-    @user = User.first
+    @user = User.first 
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     #temp current user
-     # @current_user = User.last
+      @current_user = User.last
 
     @tab_class = Hash.new
     @tab_class = {

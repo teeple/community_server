@@ -2,10 +2,16 @@
 
 <!-- search input -->
 <%= form_tag search_path,:method => 'get'%>
-<div class="input-group">
-	<input name="tab" type="hidden" value="<%=@tab%>"/>
-	<%= text_field_tag :keyword, @keyword, :class => "form-control", :placeholder=> "Search" %>
-<span class="input-group-addon"><%= submit_tag 'Done'%></span>
+<div class="row search_div">
+	<div class="col-xs-12">
+		<div class="input-group">
+			<input name="tab" type="hidden" value="<%=@tab%>"/>
+			<%= text_field_tag :keyword, @keyword, :class => "form-control", :placeholder=> "Search"%>
+			<span class="input-group-addon"><%= submit_tag 'Done',:class=>"search_submit"%></span>
+		</div>
+		<br/>
+	</div>
+
 </div>
 
 <!-- tab -->

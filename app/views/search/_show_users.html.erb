@@ -1,40 +1,42 @@
 <!-- follower list -->
-<%if @tab_class[:users] == "btn-primary" %>
-  <% if @users %>
-    <div class="container" id="content_users">
+<%if @tab_class[:users] == "btn-active" %>
+  <div class="container" id="content_users">
+    <% if @users %>
       <% @users.each do |user| %>
-        <div class="row">
-          <div class="col-xs-4">
-            <a href="<%= user_path(user)%>">
-              <%= image_tag user.avatar.url(:medium) %>
-            </a>
-          </div>
-          <div class="col-xs-7 well" style="vertical-align:middle;"><p ><%= user.description %></p></div>
-        </div>
-        <div class="row">
-            <div class="col-xs-4" style="text-align:center;">
-              <a href="<%= user_path(user)%>" align="center">
-                <em id="user_id_<%=user.id%>" value="user_id_<%=user.id%>">
-                  <%= user.user_name %>
-                </em>
-              </a>
-            </div>
-            <div class="col-xs-8">Follower <span class="badge"><%= User.my_followers_count(user) %></span></div>
-        </div>
-        <div class="row"><div class="col-xs-12"><hr></div></div>
-      <% end %>
-      <br/>
-      <!-- paging -->
-      <!-- paging -->
-      <div class="row">
-        <div class="col-xs-12">
-          <%= paginate @users ,:window => 1%>
-          <br/>
-        </div>
-      </div>
-  </div>
-  <% else %>
-      no search result
-  <% end 
-  end %>
+		  <div class="row">
+		    <div class="col-xs-3">
+		      <a href="<%= user_path(user)%>">
+		        <%= image_tag user.avatar.url(:medium), :width => "100%",:height => "100%", :class => "round_border" %>
+		      </a>
+		    </div>
+		    <div class="col-xs-9" style="vertical-align:middle;">
+		      <span class="user_name">
+		        <%= user.user_name %>
+		      </span>        
+		      <% if user.user_type %>
+		        <span class="cafe badge">
+		          Cafe
+		        </span>
+		      <% end %>
+		      <br/><br/>
+		      <div class="user_description" >
+		        <%= user.description %>        
+		      </div>
+		    </div>
+		  </div>
+		  <div class="row"><div class="col-xs-12"><hr></div></div>
+		<% end %>
+		<br/>
+		<div class="col-xs-12 text-center">
+		  <%= paginate @users ,:window => 1%>
+		  <br/>
+		</div>
+		</br/>
+    </div>
+    <% else %>
+        no search result
+    <% end %>
+  </div> 
+<% end %>
+
   

@@ -38,15 +38,17 @@
           <div class="gray_color">Followers</div>
         </div>
         <div class="col-xs-6 text-center">
-          <div>
             <% if rel.count > 0 %>
-              <%= link_to image_tag('/images/icon_unfollow.png') , user_path(@user,:trigger_element => 'following'), remote: true ,:class => 'no_hover'%>
+              <div>
+                <%= link_to image_tag('/images/icon_unfollow.png') , user_path(@user,:trigger_element => 'following'), remote: true ,:class => 'no_hover'%>
+              </div>
               <div class="gray_color">Unfollow</div>
             <% else %>
+              <div>
               <%= link_to image_tag('/images/icon_follow.png') , user_path(@user,:trigger_element => 'following'), remote: true,:class => 'no_hover'%>
+              </div>
               <div class="gray_color">Follow</div>
             <% end %>
-          </div>
         </div>
       </div>
     </div>

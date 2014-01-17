@@ -1,0 +1,30 @@
+<% users.each do |user| %>
+  <div class="row">
+    <div class="col-xs-3">
+      <a href="<%= user_path(user)%>">
+        <%= image_tag user.avatar.url(:medium), :width => "100%",:height => "100%", :class => "round_border" %>
+      </a>
+    </div>
+    <div class="col-xs-9" style="vertical-align:middle;">
+      <span class="user_name">
+        <%= user.user_name %>
+      </span>        
+      <% if user.user_type %>
+        <span class="cafe badge">
+          Cafe
+        </span>
+      <% end %>
+      <br/><br/>
+      <div class="user_description" >
+        <%= user.description %>        
+      </div>
+    </div>
+  </div>
+  <div class="row"><div class="col-xs-12"><hr></div></div>
+<% end %>
+<br/>
+<div class="col-xs-12 text-center">
+  <%= paginate users ,:window => 1%>
+  <br/>
+</div>
+</br/>
