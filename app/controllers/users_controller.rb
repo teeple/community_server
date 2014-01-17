@@ -106,7 +106,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         sign_in(@user)
-        format.html { redirect_to @user, notice: '가입을 축하합니다' }
+        format.html { redirect_to setting_path, notice: '가입을 축하합니다' }
         format.json { render action: 'show', status: :created, location: @user }
       else
         format.html { render action: 'new' }
