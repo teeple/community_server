@@ -22,54 +22,49 @@ public class WebServiceClient
     public static void main(String[] args)
     {
       WebServiceClient client = new WebServiceClient();
-
       Connection con = null;
 
-      while(true){
+      // while(true){
           try{
-            System.out.println("....\n");
-
-            client.sendSms("01087259388", "testtest");
-            break;
-
-            // //make connection
-            // if(con == null) con = DriverManager.getConnection("jdbc:mysql://222.235.208.216/com_dev","root", "root.123");
+            //make connection
+            if(con == null) con = DriverManager.getConnection("jdbc:mysql://222.235.208.216/com_dev","root", "root.123");
             
-            // //fetch sms request
-            // java.sql.Statement st = null;
-            // ResultSet rs = null;
-            // st = con.createStatement();
-            // rs = st.executeQuery("select receiver_phone_no, sms_message, event_id from sms_notifications where status = 'NEW'");
+            //fetch sms request
+            java.sql.Statement st = null;
+            ResultSet rs = null;
+            st = con.createStatement();
+            rs = st.executeQuery("select receiver_phone_no, sms_message, event_id from sms_notifications where status = 'NEW'");
 
-            // while (rs.next()) {
-            //   //String str = rs.getNString(1);
-            //   String phone_no = rs.getString("receiver_phone_no");
-            //   String sms_message = rs.getString("sms_message");
-            //   int event_id = rs.getInt("event_id");
+            while (rs.next()) {
+              //String str = rs.getNString(1);
+              String phone_no = rs.getString("receiver_phone_no");
+              String sms_message = rs.getString("sms_message");
+              int event_id = rs.getInt("event_id");
 
-            //   //send sms
-            //   HashMap<String, String> result = client.sendSms(phone_no,sms_message);
+              //send sms
+              HashMap<String, String> result = client.sendSms(phone_no,sms_message);
               
-            //   //update database
-            //   String update_sql = "update sms_notifications set status = ? , error_reason = ? ,sent_at = now() where event_id = ?";
-            //   PreparedStatement update_st = con.prepareStatement(update_sql);
+              //update database
+              String update_sql = "update sms_notifications set status = ? , error_reason = ? ,sent_at = now() where event_id = ?";
+              PreparedStatement update_st = con.prepareStatement(update_sql);
  
-            //   update_st.setString(1, result.get("code"));
-            //   update_st.setString(2, result.get("error_reason"));
-            //   update_st.setInt(3, event_id);
-            //   update_st.executeUpdate();
-            // }
+              // update_st.setString(1, result.get("code"));
+              // update_st.setString(2, result.get("error_reason"));
+              // update_st.setInt(3, event_id);
+              // update_st.executeUpdate();
+            }
 
             // Thread.sleep(5000);
-          // } catch (SQLException sqex) {
-          //   System.out.println("SQLException: " + sqex.getMessage());
-          //   System.out.println("SQLState: " + sqex.getSQLState());
-          // } catch (java.lang.InterruptedException e){
-          //   System.out.println(e);
-            } catch(Exception e) {
-              // System.out.printlin(e);
-            }
-      }     
+          } catch (SQLException sqex) {
+            System.out.println("SQLException: " + sqex.getMessage());
+            System.out.println("SQLState: " + sqex.getSQLState());
+          // } catch (java.lang.InterruptedException el){
+          //   System.out.println(el);
+          } catch(Exception e) {
+            System.out.println(e);
+            
+          }
+      // }     
     }
 
     private HashMap<String, String> sendSms(String phone_no, String sms_message){
@@ -113,6 +108,7 @@ public class WebServiceClient
       // params[10] = new WsParam();               // 수신자의 번호이동정보 
       // params[10].setName("RECEIVE_PHONE_RD");
       // params[10].setValue("");
+      params[6] = new WsParam();    
       params[6].setName("PREPAID");
       params[6].setValue("0");
       // params[12] = new WsParam();               // 지연 전송 시간(예약전송시 참조)을 위한 필드 

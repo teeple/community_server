@@ -2,49 +2,111 @@
 
 <!-- profile -->
 <%= form_for @user, :url => user_path(@user), :method => "put", :html => { :multipart => true } do |form| %>
-<div class="container">
-  <div class="row">
-    <div class="col-xs-1"></div>
-    <div class="col-xs-10 text-center">
-      <div class="fileinput fileinput-new" data-provides="fileinput">
-        <div class="fileinput-new thumbnail" style="width: 200px; height: 200px;">
-          <%= image_tag @user.avatar.url(:medium) %>
-          <!-- <img src="http://4.bp.blogspot.com/-S6gwYPFP_lw/Uow-EhdHOPI/AAAAAAAAnWs/fcrHub2kcS4/s1600/Miss+A+Suzy+%EC%88%98%EC%A7%80+Hush+Teaser.jpg" class="img-responsive" alt="..."> -->
-        </div>
-        <div><%= @user.user_name %></div>
-        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 200px;"></div>
-        <div>
-          <br/>
-          <span class="btn btn-default btn-file"><span class="fileinput-new">사진 변경</span><span class="fileinput-exists">변경</span>
-          <%= form.file_field :avatar %>
-          </span>
-          <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">취소</a>
+  <div class="container profile_background">
+    <br/>
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-10 text-center">
+        <div class="fileinput fileinput-new" data-provides="fileinput">
+          <div class="fileinput-new thumbnail" style="width: 100%; height: 100%;">
+            <%= image_tag @user.avatar.url(:medium) %>
+          </div>
+          <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 200px;"></div>
+          <div class="user_name"><%= @user.user_name %></div>
+          <div>
+            <br/>
+            <span class="btn btn-default btn-file btn-info"><span class="fileinput-new">Image</span><span class="fileinput-exists">Change</span>
+            <%= form.file_field :avatar %>
+            </span>
+            <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Cancel</a>
+          </div>
         </div>
       </div>
+      <div class="col-xs-1"></div>
     </div>
-    <div class="col-xs-1"></div>
   </div>
-</div>
-<div class="container">
-  <div class="row-fluid">
-    <div>
-      <div class="form-group">
-        <div class="controls">
-          <!--
-            <%= form.text_field :user_name, :readonly => true %> <br>
-            <%= form.text_field :phone_no, :readonly => true %> <br>
-          -->
-            <% if @user.user_type %>
-              <%= form.text_field :expire_day, :class=> 'form_control' ,:placeholder => '만료일'%><br>
-              <%= form.text_field :expire_hour, :class=> 'form_control',:placeholder => '만료시간' %><br>
-            <% end %>
-          <%= form.text_area :description,:class=> 'form-control', :rows => '5' ,:maxlength =>140, :placeholder => '자신을 소개해주세요' %> <br>
-          <%= form.submit :class=> "btn pull-right btn-primary" %>
+  <div class="container">
+    <div class="row">
+      <div>
+        <div class="form-group">
+          <div class="controls">
+            <%= form.text_area :description,:class=> 'form-control', :rows => '7' ,:maxlength =>140, :placeholder => 'Write Your Profile..' %> <br>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
+  <% if @user.user_type %>
+    <div class="row text-center">
+      <div class="col-xs-12">
+        <div class="input-group">
+          <div class="input-group-btn">
+            &nbsp;
+            <label>Expired At </label>
+            <%= select_tag :expire_day, 
+                  options_for_select([
+                    ['0 Day', 0],
+                    ['1 Day', 1],
+                    ['2 Days', 2],
+                    ['3 Days', 3],
+                    ['4 Days', 4],
+                    ['5 Days', 5],
+                    ['6 Days', 6],
+                    ['7 Days', 7],
+                    ['10 Days', 10],
+                    ['15 Days', 15],
+                    ['20 Days', 20],
+                    ['30 Days', 30],
+                    ['45 Days', 45],
+                    ['60 Days', 60],
+                    ['90 Days', 90]]),
+                  :class=> 'form_control'%>
+            <%= select_tag :expire_hour, 
+                  options_for_select([
+                    ['0 Hour', 0],
+                    ['1 Hour', 1],
+                    ['2 Hours', 2],
+                    ['3 Hours', 3],
+                    ['4 Hours', 4],
+                    ['5 Hours', 5],
+                    ['6 Hours', 6],
+                    ['7 Hours', 7],
+                    ['8 Hours', 8],
+                    ['9 Hours', 9],
+                    ['10 Hours', 10],
+                    ['11 Hours', 11],
+                    ['12 Hours', 12],
+                    ['13 Hours', 13],
+                    ['14 Hours', 14],
+                    ['15 Hours', 15],
+                    ['16 Hours', 16],
+                    ['17 Hours', 17],
+                    ['18 Hours', 18],
+                    ['19 Hours', 19],
+                    ['20 Hours', 20],
+                    ['21 Hours', 21],
+                    ['22 Hours', 22],
+                    ['23 Hours', 23]]),
+                  :class=> 'form_control'%>
+            <label>later </label>
+          </div><!-- /btn-group -->
+        </div><!-- /input-group -->
+      </div><!-- /.col-lg-6 -->
+    </div><!-- /.row -->
+    <hr/>
+  <% end %>
+  <div class="container">
+    <div class="row-fluid">
+      <div>
+        <div class="form-group">
+          <div class="controls">
+            <%= form.submit :class=> "btn pull-right btn-primary" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
 <% end %>
 

@@ -41,16 +41,16 @@ en:
   helpers:
     submit:
       user:
-        create: "회원가입"
-        update: "저장"
+        create: "Sign Up"
+        update: "Save"
       message:
         create: "Post"
-        update: "저장"
+        update: "Save"
   activerecord:
     attributes:
       user:
-        user_name: "아이디"
-        phone_no: "전화번호"
+        user_name: "User Name"
+        phone_no: "Phone No"
     errors:
       models:
         user:

@@ -1,16 +1,26 @@
 class MessagesController < ApplicationController
   before_action :set_message, only: [:show, :edit, :update, :destroy]
-  # before_action :signed_in_user
+  before_action :signed_in_user
   
   # GET /messages
   # GET /messages.json
   def index
     #temp current user
-    @current_user = User.first
+    # @current_user = User.first
 
     page_num = params[:page]? params[:page] : 1
 
-    @messages = Message.friends_messages(@current_user,page_num)
+    @tab_class = Hash.new
+    @tab_class = {
+      :friends => 'btn-deactive', 
+      :me => 'btn-deactive', 
+    }
+    @tab = params[:tab]? params[:tab] : 'friends'
+    @tab_class[@tab.to_sym] = 'btn-active'
+
+    @messages = (@tab == 'friends')? Message.friends_messages(@current_user,page_num)
+                  : Message.all.where(:user_id => @current_user.id).order("created_at desc").page(page_num)
+
   end
 
   # GET /messages/1
@@ -21,7 +31,7 @@ class MessagesController < ApplicationController
   # GET /messages/new
   def new
     #temp current user
-    @current_user = User.first
+    # @current_user = User.last
     
     @message = Message.new
   end
@@ -35,7 +45,7 @@ class MessagesController < ApplicationController
   def create
     #temp current user
     # @current_user = User.find(23)
-    @current_user = User.last
+    # @current_user = User.last
     
     @message = @current_user.messages.build(message_params)
     

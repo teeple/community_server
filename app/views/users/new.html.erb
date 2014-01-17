@@ -4,8 +4,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body class="sign_up_form">
-	<h1>New user</h1>
+<body class="body-signup">
 
-	<%= render 'form' %>
+<div class="container">
+  <!-- <form class="form-signup"> -->
+  <%= form_for(@user) do |f| %>
+    <h2 class="form-signup-heading">WARP Community</h2>
+	<% if @user.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+	      <ul>
+	      <% @user.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+    </div>
+	<% end %>
+    <%= f.text_field :user_name,:class=> 'form-control user_name', :maxlength =>15, :placeholder => 'User Name' %>
+    <%= f.text_field :phone_no,:class=> 'form-control phone_no', :maxlength =>15, :"data-mask" => "999-9999-9999", :placeholder => 'Phone Number' %>
+    <%= f.check_box :user_type %> Cafe 회원
+    <button class="btn btn-lg btn-primary btn-block" type="submit">회원 가입</button>
+ <%end%>
+</div> <!-- /container -->
+
 </body>

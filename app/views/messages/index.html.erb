@@ -1,11 +1,15 @@
 <%= render "/shared/common_header", title: "Messages"%>
+<!-- tab -->
+<div class="btn-group btn-group-justified">
+  <a class="btn <%= @tab_class[:friends] %>" role="button" id="tab_btn_friends" href="<%= messages_path%>?tab=friends">Friends</a>
+  <a class="btn <%= @tab_class[:me] %>" role="button" id="tab_btn_me"  href="<%= messages_path%>?tab=me">Mine</a>
+</div>
 <br/>
 
-<!-- follower list -->
-<div class="container" id="content_messages">
-  <%= render "/shared/message_list", messages: @messages, current_user: @current_user %>
-</div>
-<br/><br/><br/><br/>
+<%= render "/shared/message_list", messages: @messages, current_user: @current_user %>
+
+<br/></br></br></br>
+
 <div class="row-fluid navbar-fixed-bottom btn-group btn-group-justified">
   <div class="navbar-inner navbar-content-center">
     <%= link_to "Write" , new_message_path, :class => 'btn btn-write', :role=>'button'%>

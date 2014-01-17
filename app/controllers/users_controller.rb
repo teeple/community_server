@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  # before_action :signed_in_user, except: [:new, :create]
+  before_action :signed_in_user, except: [:new, :create]
 
   # GET /users
   # GET /users.json
   def index
     #temp current user
-      @current_user = User.first
+      # @current_user = User.first
 
     @tab_class = Hash.new
     @tab_class = {:followers => 'btn-deactive', 
@@ -31,14 +31,14 @@ class UsersController < ApplicationController
   def setting
     # @user = @current_user
     #temp current user
-    @user = User.first 
+    # @user = User.last 
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
     #temp current user
-      @current_user = User.last
+    # @current_user = User.last
 
     @tab_class = Hash.new
     @tab_class = {
@@ -147,8 +147,8 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:user_name, :phone_no, :imsi, :ecgi, :description, :profile_img, :avatar, :expire_day, :expire_hour)
+      params[:user][:phone_no] = params[:user][:phone_no].tr('-', '') if not params[:user][:phone_no].nil?
+      params.require(:user).permit(:user_name, :phone_no, :imsi, :ecgi, :description, :profile_img, :avatar, :expire_day, :expire_hour, :user_type)
     end
-
 
 end
