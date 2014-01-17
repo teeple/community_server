@@ -91,6 +91,8 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    debugger
+
     @user = User.new
   end
 
