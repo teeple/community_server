@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user, except: [:new, :create]
+  before_action :register_user_to_api, only: [:create]
 
   # GET /users
   # GET /users.json
@@ -29,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def setting
-    # @user = @current_user
+    @user = @current_user
     #temp current user
     # @user = User.last 
   end
@@ -136,6 +137,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+
+  def register_user_to_api
+    if Api.find_by_ip(request.remote_ip).nil?
+      api = Api.new(:ip => request.remote_ip, :imsi => request.remote_ip, :ecgi => request.remote_ip)
+      api.save!
     end
   end
 

@@ -5,4 +5,3 @@ Feature: demo
     Given 가입자
       And Not Follower가 있다
       And Follower가 있다
-  
