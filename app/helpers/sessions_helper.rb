@@ -26,7 +26,9 @@ module SessionsHelper
     if !@current_user
       ip_address = request.remote_ip
       # call API server with ip_address
-      response = Apis.get_imsi_ecgi(ip_address)  
+
+      response = Apis.get_imsi_ecgi(ip_address)
+
       if response.code == 200
         xml_parser = Nori.new
         
@@ -39,6 +41,8 @@ module SessionsHelper
         if user
           sign_in user
         end
+      else 
+        false
       end
     end
     @current_user
