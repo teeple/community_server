@@ -172,7 +172,7 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params[:user][:phone_no] = params[:user][:phone_no].tr('-', '') if not params[:user][:phone_no].nil?
-      params.require(:user).permit(:user_name, :phone_no, :imsi, :ecgi, :description, :profile_img, :avatar, :expire_day, :expire_hour, :user_type)
+      params.require(:user).permit(:user_name, :phone_no, :imsi, :ecgi, :description, :avatar, :expire_day, :expire_hour, :user_type)
     end
 
 end

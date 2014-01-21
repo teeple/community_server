@@ -44,7 +44,7 @@
           <div class="input-group-btn">
             &nbsp;
             <label>Expired At </label>
-            <%= select_tag :expire_day, 
+            <%= form.select(:expire_day,
                   options_for_select([
                     ['0 Day', 0],
                     ['1 Day', 1],
@@ -60,9 +60,8 @@
                     ['30 Days', 30],
                     ['45 Days', 45],
                     ['60 Days', 60],
-                    ['90 Days', 90]]),
-                  :class=> 'form_control'%>
-            <%= select_tag :expire_hour, 
+                    ['90 Days', 90]],selected: @user.expire_day ? @user.expire_day : ENV['EXPIRE_DAY'])) %>
+            <%= form.select(:expire_hour,
                   options_for_select([
                     ['0 Hour', 0],
                     ['1 Hour', 1],
@@ -87,8 +86,7 @@
                     ['20 Hours', 20],
                     ['21 Hours', 21],
                     ['22 Hours', 22],
-                    ['23 Hours', 23]]),
-                  :class=> 'form_control'%>
+                    ['23 Hours', 23]],selected: @user.expire_hour ? @user.expire_hour : ENV['EXPIRE_HOUR']))%>
             <label>later </label>
           </div><!-- /btn-group -->
         </div><!-- /input-group -->
