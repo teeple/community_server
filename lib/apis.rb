@@ -4,21 +4,27 @@ module Apis
 		url += '/Management/IMSI'
 		
 		# RestClient.get url, {:params => {'IP' => ip_address},:content_type => :xml, :accept => :xml} 
-		RestClient.get(url, {:params => {'IP' => ip_address},:content_type => :xml, :accept => :xml} ){|response, request, result| response }
+		result = RestClient.get(url, {:params => {'IP' => ip_address},:content_type => :xml, :accept => :xml} ){|response, request, result| response }
+		ComDev::Application.config.logger.error '### ' + result
+		result
 	end
 
 	def self.tracking_on(imsi,ecgi)
 		url = ENV['API_SERVER_HOST'] + ':' + ENV['API_SERVER_PORT']
 		url += '/Management/Tracking'
 		# RestClient.get url, {:params => {'IMSI' => imsi, 'ECGI' => ecgi},:content_type => :xml, :accept => :xml}
-		RestClient.get(url, {:params => {'IMSI' => imsi, 'ECGI' => ecgi},:content_type => :xml, :accept => :xml}){|response, request, result| response }
+		result = RestClient.get(url, {:params => {'IMSI' => imsi, 'ECGI' => ecgi},:content_type => :xml, :accept => :xml}){|response, request, result| response }
+		ComDev::Application.config.logger.error '### ' + result
+		result
 	end
 
 	def self.location_fetch(imsi)
 		url = ENV['API_SERVER_HOST'] + ':' + ENV['API_SERVER_PORT']
 		url += '/Management/ECGI'
 		# RestClient.get url, {:params => {'IMSI' => imsi}, :content_type => :xml, :accept => :xml}
-		RestClient.get(url, {:params => {'IMSI' => imsi}, :content_type => :xml, :accept => :xml}){|response, request, result| response }
+		result = RestClient.get(url, {:params => {'IMSI' => imsi}, :content_type => :xml, :accept => :xml}){|response, request, result| response }
+		ComDev::Application.config.logger.error '### ' + result
+		result
 	
 	end
 

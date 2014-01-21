@@ -1,6 +1,7 @@
 class MessageFlagsController < ApplicationController
   before_action :set_message_flag, only: [:show, :edit, :update, :destroy]
   before_action :signed_in_user
+
   # GET /message_flags
   # GET /message_flags.json
   def index

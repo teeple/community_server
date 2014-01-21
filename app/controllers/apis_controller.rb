@@ -7,7 +7,9 @@ class ApisController < ApplicationController
 
   def imsi_ecgi
     @api = Api.find_by_ip(params[:IP])
-    render '404', status: 404
+    if @api.nil? 
+	render '404', status: 404
+    end
   end
 
   def location_fetch

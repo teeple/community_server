@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
@@ -77,3 +78,4 @@ gem "daemons"
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'puma'
+gem 'quiet_assets'

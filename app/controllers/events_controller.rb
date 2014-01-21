@@ -26,6 +26,9 @@ class EventsController < ApplicationController
   def create
     xml_parser = Nori.new
     result = xml_parser.parse(request.body.read)
+
+logger.error '### ' + result
+
     imsi = result['BODY']['IMSI']
     in_or_out = result['BODY']['EVENT']
 

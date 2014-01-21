@@ -91,8 +91,6 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    debugger
-
     @user = User.new
   end
 
@@ -106,16 +104,28 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.remote_ip = request.remote_ip
 
-    respond_to do |format|
-      if @user.save
-        sign_in(@user)
-        format.html { redirect_to setting_path, notice: '가입을 축하합니다' }
-        format.json { render action: 'show', status: :created, location: @user }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    response = Apis.get_imsi_ecgi(request.remote_ip)
+
+   	if response.code != 200
+		redirect_to new_user_path, notice: '해당 사용자가 등록되어 있지 않습니다.'
+	else 
+		xml_parser = Nori.new
+
+		result = xml_parser.parse(response.body)
+		@user.imsi = result['BODY']['IMSI']
+		@user.ecgi = result['BODY']['ECGI']
+		
+		respond_to do |format|
+				if @user.save
+					sign_in(@user)
+					format.html { redirect_to setting_path, notice: '가입을 축하합니다' }
+					format.json { render action: 'show', status: :created, location: @user }
+				else
+					format.html { render action: 'new' }
+					format.json { render json: @user.errors, status: :unprocessable_entity }
+				end
+		end
+	end
   end
 
   # PATCH/PUT /users/1
@@ -143,9 +153,13 @@ class UsersController < ApplicationController
   end
 
   def register_user_to_api
-    if Api.find_by_ip(request.remote_ip).nil?
-      api = Api.new(:ip => request.remote_ip, :imsi => request.remote_ip, :ecgi => request.remote_ip)
-      api.save!
+    if ENV['API_SERVER_MOCKUP'] == 'true'
+	logger.error '### ' + 'create user to api server for testing'
+
+    	if Api.find_by_ip(request.remote_ip).nil?
+      	api = Api.new(:ip => request.remote_ip, :imsi => request.remote_ip, :ecgi => request.remote_ip)
+      	api.save!
+    	end
     end
   end
 

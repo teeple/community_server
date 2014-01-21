@@ -20,7 +20,6 @@ module SessionsHelper
       remember_token  = User.encrypt(cookies[:remember_token])
       @current_user ||= User.find_by(remember_token: remember_token)
     end
-
     # cookie가 없거나, current_user가 Community Server에 없을 경우
 
     if !@current_user
@@ -28,7 +27,6 @@ module SessionsHelper
       # call API server with ip_address
 
       response = Apis.get_imsi_ecgi(ip_address)
-
       if response.code == 200
         xml_parser = Nori.new
         
@@ -36,7 +34,7 @@ module SessionsHelper
         imsi = result['BODY']['IMSI']
         ecgi = result['BODY']['ECGI']
         
-        user = User.find_by imsi: imsi, ecgi:ecgi
+        user = User.find_by imsi: imsi, ecgi: ecgi
         # 가입자이면 가입 처리 진행
         if user
           sign_in user
