@@ -10,7 +10,7 @@ class Spinach::Features::Setting < Spinach::FeatureSteps
   end
 
   step 'Submit 클릭' do
-    click_button("저장")
+    click_button("Save")
   end
 
   step '프로필 수정이 완료되었습니다 출력' do

@@ -9,12 +9,12 @@ class Spinach::Features::Search < Spinach::FeatureSteps
   step '검색어를 포함하는 글 리스트 생성' do
     @keyword = '수지'
     @user.messages.create(:message => '수지야 안녕')
-    @user.messages.create(:mesasge => '저수지')
+    @user.messages.create(:message => '저수지')
   end
 
   step '검색어를 포함하지 않는 글 리스트 생성' do
     @user.messages.create(:message => '안녕하세요, 반갑습니다.')
-    @user.messages.create(:mesasge => '저수원에서 살아요')
+    @user.messages.create(:message => '저수원에서 살아요')
   end
 
   step '검색어 입력' do

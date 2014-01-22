@@ -18,7 +18,7 @@ class Spinach::Features::SignUp < Spinach::FeatureSteps
   end
 
   step '회원가입 클릭' do
-    click_button('회원가입');
+    click_button('회원 가입');
   end
 
   step '가입페이지에서 머무름' do
