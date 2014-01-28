@@ -31,8 +31,20 @@ class UsersController < ApplicationController
 
   def setting
     @user = @current_user
-    #temp current user
-    # @user = User.last 
+    
+    @tab_class = Hash.new
+    @tab_class = {:profile => 'btn-deactive', 
+      :my_followers => 'btn-deactive', 
+    }
+    @tab = params[:tab]? params[:tab] : 'profile'
+    @tab_class[@tab.to_sym] = 'btn-active'
+
+    page_num = params[:page]? params[:page] : 1
+
+    case params[:tab]
+      when 'my_followers'
+        @users = User.my_followees(@user,page_num)
+    end
   end
 
   # GET /users/1

@@ -40,6 +40,10 @@ class User < ActiveRecord::Base
     user.followee.order("user_name asc").page(page_num)
   end
 
+  def self.my_followees(user,page_num)
+    User.where(:id => Relation.where(:user_to => user.id).pluck(:user_from)).order("user_name asc").page(page_num)
+  end
+
   def self.relation_follows_me_with_entry(user)
     Relation.where(:user_to => user.id,:event_entry => true)
   end
