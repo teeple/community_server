@@ -103,6 +103,8 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
+    
+logger.error '### ' + request.remote_ip
     if signed_in?
       redirect_to users_path
     else
@@ -121,7 +123,7 @@ class UsersController < ApplicationController
     @user.remote_ip = request.remote_ip
 
     response = Apis.get_imsi_ecgi(request.remote_ip)
-
+logger.error '### ' + response.code.to_s
    	if response.code != 200
 		redirect_to new_user_path, notice: '해당 사용자가 등록되어 있지 않습니다.'
 	else 
