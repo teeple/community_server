@@ -175,7 +175,7 @@ logger.error '### ' + response.code.to_s
 	logger.error '### ' + 'create user to api server for testing'
 
     	if Api.find_by_ip(request.remote_ip).nil?
-      	api = Api.new(:ip => request.remote_ip, :imsi => request.remote_ip, :ecgi => request.remote_ip)
+      	api = Api.new(:ip => request.remote_ip, :imsi => request.remote_ip, :ecgi => 'temp_ecgi')
       	api.save!
     	end
     end
