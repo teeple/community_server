@@ -27,7 +27,7 @@ public class WebServiceClient
       // while(true){
           try{
             //make connection
-            if(con == null) con = DriverManager.getConnection("jdbc:mysql://222.235.208.216/com_dev","root", "root.123");
+            if(con == null) con = DriverManager.getConnection("jdbc:mysql://localhost/com_dev","root", "root.123");
             
             //fetch sms request
             java.sql.Statement st = null;
@@ -136,6 +136,7 @@ public class WebServiceClient
         
       // 표준 API URL 셋팅, 웹서비스 주소 변경시 serviceURL의 URL를 수정한다. 
       String serviceURL = "http://125.131.85.42:80/khub/WebService";
+      String serviceURL = "http://221.148.240.25/khub/WebService"; // 상용 서버 IP
 
       IWebServiceEndpoint iwse = null;
         try {
