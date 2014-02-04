@@ -125,7 +125,8 @@ public class WebServiceClient
       wps.setParam(params);
       // BizTemplate 인증키 셋팅
       // String authKey = "TXXXXXXXXXXXX";
-      String authKey = "T8D0DC0AECDD0828";
+      // String authKey = "T8D0DC0AECDD0828";
+      String authKey = "S8D0EF28CBC9060E";
          
       // BizTemplate ID 셋팅
       // String templateID = "AUTH_JOININFOWCDM";
