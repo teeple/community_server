@@ -12,4 +12,4 @@ export CLASSPATH=$CLASSPATH:./lib/xmlparserv2.jar
 export CLASSPATH=$CLASSPATH:./lib/xsdlib.jar
 export CLASSPATH=$CLASSPATH:./src/khub
 export CLASSPATH=$CLASSPATH:./lib/mysql-connector-java-5.1.28-bin.jar
-java -classpath $CLASSPATH WebServiceClient
+nohup java -classpath $CLASSPATH WebServiceClient > /var/www/com_dev/log/sms_notification.log &
