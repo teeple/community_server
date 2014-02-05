@@ -56,7 +56,8 @@ public class WebServiceClient
             
             st.close();
             rs.close();
-            // Thread.sleep(5000);
+            Thread.sleep(5000);
+            
           } catch (SQLException sqex) {
             System.out.println("SQLException: " + sqex.getMessage());
             System.out.println("SQLState: " + sqex.getSQLState());
