@@ -53,6 +53,10 @@ class UsersController < ApplicationController
     #temp current user
     # @current_user = User.last
 
+
+    if @current_user.id == @user.id
+	redirect_to setting_path
+    else 
     @tab_class = Hash.new
     @tab_class = {
       :profile => 'btn-deactive', 
@@ -98,7 +102,7 @@ class UsersController < ApplicationController
         format.html { render action: 'show' }
       end
     end
-
+end
   end
 
   # GET /users/new

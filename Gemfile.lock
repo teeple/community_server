@@ -104,8 +104,6 @@ GEM
       cocaine (~> 0.5.3)
       mime-types
     polyglot (0.3.3)
-    puma (2.7.1)
-      rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     racc (1.4.10)
@@ -216,7 +214,6 @@ DEPENDENCIES
   mysql2
   nori
   paperclip
-  puma
   quiet_assets
   rack-test
   railroady

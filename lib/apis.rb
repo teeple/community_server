@@ -4,6 +4,8 @@ module Apis
 		url += '/Management/IMSI'
 		
 		# RestClient.get url, {:params => {'IP' => ip_address},:content_type => :xml, :accept => :xml} 
+		ComDev::Application.config.logger.error '### API SERVER URL ' + url
+		ComDev::Application.config.logger.error '### Client IP ' + ip_address
 		result = RestClient.get(url, {:params => {'IP' => ip_address},:content_type => :xml, :accept => :xml} ){|response, request, result| response }
 		ComDev::Application.config.logger.error '### ' + result
 		result
@@ -22,6 +24,8 @@ module Apis
 		url = ENV['API_SERVER_HOST'] + ':' + ENV['API_SERVER_PORT']
 		url += '/Management/ECGI'
 		# RestClient.get url, {:params => {'IMSI' => imsi}, :content_type => :xml, :accept => :xml}
+		ComDev::Application.config.logger.error '### API SERVER URL ' + url
+
 		result = RestClient.get(url, {:params => {'IMSI' => imsi}, :content_type => :xml, :accept => :xml}){|response, request, result| response }
 		ComDev::Application.config.logger.error '### ' + result
 		result

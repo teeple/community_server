@@ -77,6 +77,7 @@ gem 'awesome_print'
 gem "daemons"
 gem 'delayed_job'
 gem 'delayed_job_active_record'
-gem 'puma'
+#gem 'puma'
 gem 'quiet_assets'
 gem 'rb-readline'
+#gem 'unicorn'

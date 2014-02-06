@@ -66,11 +66,11 @@ logger.error '### ' + request.body.read
        
         sms_message1 = message_flag.followee.user_name + "님의 새 글이 몇 " + message_count.to_s + " 건 있습니다. " 
         sms_message2 = ENV['COM_SERVER_URL'] + '/users/' +  message_flag.followee.id.to_s + '?tab=message'
-        sms_message = sms_message1 + sms_message2
+        sms_message3 = sms_message1 + sms_message2
 
         SmsNotification.create!(
           :receiver_user_id => user.id, 
-          :sms_message => sms_message, 
+          :sms_message => sms_message3, 
           :receiver_phone_no => user.phone_no, 
           :event_type => event.event_type,
           :event_id => event.id,
