@@ -64,7 +64,7 @@ logger.error '### ' + request.body.read
         message_count = MessageFlag.where(:user_to => user.id, :user_from => message_flag.user_from).count
        
        
-        sms_message1 = message_flag.followee.user_name + "님의 새 글이 몇 " + message_count.to_s + " 건 있습니다. " 
+        sms_message1 = message_flag.followee.user_name + "님의 새 글이 " + message_count.to_s + " 건 있습니다. " 
         sms_message2 = ENV['COM_SERVER_URL'] + '/users/' +  message_flag.followee.id.to_s + '?tab=message'
         sms_message3 = sms_message1 + sms_message2
 
